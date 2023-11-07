@@ -21,7 +21,7 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Dashboard</h3>
+          <h3 className="sidebarTitle">CCMS</h3>
           <ul className="sidebarList">
 
             <NavLink to="/" className={`link ${activeLink === '/' ? 'sidebarListItem active' : 'sidebarListItem default'}`} onClick={() => handleLinkClick('/')}>
@@ -45,7 +45,7 @@ export default function Sidebar() {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Quick Menu</h3>
+          <h3 className="sidebarSecondaryTitle">Quick Menu</h3>
           <ul className="sidebarList">
             <NavLink to="/users" className={`link ${activeLink === '/users' ? 'sidebarListItem active' : 'sidebarListItem default'}`} onClick={() => handleLinkClick('/users')}>
               <li className="sidebarListItem">

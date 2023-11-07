@@ -4,14 +4,13 @@
     left: 0;
     width: 250px; /* Adjust the width as needed */
     height: 100%;
-    border-right: 0.5px solid rgb(0, 0, 78);
-    background-color: #ffffff;
+    background-color: rgb(8, 11, 43);
     overflow-y: auto; /* Add scrolling when the content overflows */
   }
   
   .sidebarWrapper {
-    padding: 20px;
-    color: #555;
+    padding: 0 20px 20px 20px;
+    color: #fff;
   }
   
   .sidebarMenu {
@@ -19,17 +18,23 @@
   }
   
   .sidebarTitle {
-    font-size: 13px;
-    color: rgb(187, 186, 186);
+    font-size: 23px;
+    color: rgb(205, 159, 243);
   }
   
   .sidebarList {
     list-style: none;
     padding: 5px;
   }
+
+  .sidebarSecondaryTitle{
+    color: rgb(99, 99, 99);
+    font-size: 15px;
+  }
   
   .sidebarListItem {
     padding: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -37,16 +42,16 @@
   }
 
   .sidebarListItem.default{
-    color: #555;
+    color: #fff;
   }
   
   .sidebarListItem.active,
   .sidebarListItem:hover {
     background-color: rgb(240, 240, 255);
+    color: rgb(149, 149, 238);
   }
   
   .sidebarIcon{
       margin-right: 5px;
       font-size: 20px !important;
   }
-  
