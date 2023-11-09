@@ -241,7 +241,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <div className="flex items-center">
                             <AccountTreeIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Fiverr Projects
+                              Manage
                             </span>
                           </div>
                           {/* Icon */}
@@ -254,24 +254,24 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Manage Fiverr Projects") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/fiverr/ManageFProjects"
+                                to="/NewComponent"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
                                 <ConstructionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Manage Projects
+                                  New Component
                                 </span>
                               </NavLink>
                             </li>
                           ): null}
 
-                          {checkPageAccess("Monitor Fiverr Projects") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -288,18 +288,18 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("FP Categories") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/fiverr/FPCategories"
+                                to="/CMCategories"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
                                 <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  FP Categories
+                                  CM Categories
                                 </span>
                               </NavLink>
                             </li>
@@ -430,7 +430,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
 
-                          {checkPageAccess("Site Settings") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -447,7 +447,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("Database Backup") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end

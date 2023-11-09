@@ -24,33 +24,33 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 // FORMIK
 const INITIAL_FORM_STATE = {
-    projectName : "",
+  categoryName: "",
 };
 
 //YUP validations
 const validationSchema = Yup.object({
-    projectName: Yup.string().required("Project Name is required")
+  categoryName: Yup.string().required("Category Name is required")
 });
 
 //The Main function
-export default function DeleteCustProject(props) {
+export default function DeleteFPCategory(props) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
   const navigate = useNavigate();
-  const { openPopupDeleteCustProject, setOpenPopupDeleteCustProject } = props;
+  const { openPopupDeleteFPCategory, setOpenPopupDeleteFPCategory } = props;
 
-  const apiUrl = `http://localhost:8070/CustomProjects/deleteCustomProject/${props.CUPID}`; // Change to your API URL
+  const apiUrl = `http://localhost:8070/Categories/deleteCategory/${props.FPCID}`; // Change to your API URL
 
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    if (props.projectName == values.projectName) {
+    if (props.categoryName == values.categoryName) {
         try {
             await axios.delete(apiUrl, values);
-            sessionStorage.setItem("CustProjectDeleted", "1");
-            navigate("/customproj/ManageCUProjects")
+            sessionStorage.setItem("CategoryDeleted", "1");
+            navigate("/CMCategories")
         } catch (error) {
         setNotify({
             isOpen: true,
@@ -59,12 +59,12 @@ export default function DeleteCustProject(props) {
         });
         } finally {
         setSubmitting(false);
-        setOpenPopupDeleteCustProject(false);
+        setOpenPopupDeleteFPCategory(false);
         }
     } else {
         setNotify({
             isOpen: true,
-            message: "Project name is not matching!",
+            message: "Category name is not matching!",
             type: "error",
         });
     }
@@ -72,8 +72,8 @@ export default function DeleteCustProject(props) {
 
   return (
     <Dialog
-      open={openPopupDeleteCustProject}
-      onBackdropClick={() => setOpenPopupDeleteCustProject(false)}
+      open={openPopupDeleteFPCategory}
+      onBackdropClick={() => setOpenPopupDeleteFPCategory(false)}
       maxWidth="sm"
       TransitionComponent={Transition}
       PaperProps={{
@@ -84,7 +84,7 @@ export default function DeleteCustProject(props) {
         <DialogTitle>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <p className="popupTitle">Delete Custom Project</p>
+            <p className="popupTitle">Delete Category</p>
           </div>
         </div>
 
@@ -109,7 +109,7 @@ export default function DeleteCustProject(props) {
             {({ isSubmitting }) => (
             <Form>
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="projectName" label="Type Project name to confirm delete ..." />
+                <CustomTextField name="categoryName" label="Type Category name to confirm delete ..." />
               </Grid>
 
 
@@ -118,7 +118,7 @@ export default function DeleteCustProject(props) {
                   startIcon={<ClearIcon />}
                   style={{marginRight: "15px"}}
                   onClick={() => {
-                    setOpenPopupDeleteCustProject(false);
+                    setOpenPopupDeleteFPCategory(false);
                   }}
                   variant="outlined"
                   color="primary"

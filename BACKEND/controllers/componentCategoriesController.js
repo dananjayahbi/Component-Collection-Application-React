@@ -1,23 +1,23 @@
-const CCPCategories = require("../models/ccPCategories.model");
+const Categories = require("../models/componentCategories.model");
 
-// Add CCP Category
-const addCCPCategory = async (req, res) => {
+// Add Category
+const addCategory = async (req, res) => {
     const {
         categoryName, 
         description
     } = req.body;
 
-    // Check if tax with the same taxName already exists
-    const existingCateg = await CCPCategories.findOne({
+    // Check if tax with the same category already exists
+    const existingCateg = await Categories.findOne({
         $or: [{ categoryName: categoryName }],
     });
     if (existingCateg) {
         return res
         .status(400)
-        .json({ error: "A CCP Category with the same name already exists" });
+        .json({ error: "A FP Category with the same name already exists" });
     }
 
-    const category = await CCPCategories.create({
+    const category = await Categories.create({
         categoryName, 
         description
     });
@@ -32,9 +32,9 @@ const addCCPCategory = async (req, res) => {
 };
 
 
-//Get All CCP Categories
-const getAllCCPCategories = async (req, res) => {
-    const abc = await CCPCategories.find()
+//Get All Categories
+const getAllCategories = async (req, res) => {
+    const abc = await Categories.find()
       .then((categ) => {
         res.json(categ);
       })
@@ -43,10 +43,10 @@ const getAllCCPCategories = async (req, res) => {
       });
 };
 
-//Get a CCP Category
-const getCCPCategory = async (req, res) => {
+//Get a Category
+const getCategory = async (req, res) => {
     try {
-      const categoryObject = await CCPCategories.findById(req.params.id);
+      const categoryObject = await Categories.findById(req.params.id);
   
       if (!categoryObject) {
         return res.status(404).json({ error: 'Category not found' });
@@ -68,8 +68,8 @@ const getCCPCategory = async (req, res) => {
     }
   };
 
-//Update CCP Category
-const updateCCPCategory = async (req, res) => {
+//Update FP Category
+const updateCategory = async (req, res) => {
     try {
       const { 
         categoryName, 
@@ -82,16 +82,16 @@ const updateCCPCategory = async (req, res) => {
       };
   
       // Updating
-      const update = await CCPCategories.findByIdAndUpdate(req.params.id, updateData);
+      const update = await Categories.findByIdAndUpdate(req.params.id, updateData);
   
       if (update) {
         res.status(200).json({
-          data: 'CCP Category updated successfully',
+          data: 'Category updated successfully',
           status: true,
         });
       } else {
         res.status(401).json({
-          errorMessage: 'Failed to edit the CCP Category!',
+          errorMessage: 'Failed to edit the Category!',
           status: false,
         });
       }
@@ -104,19 +104,19 @@ const updateCCPCategory = async (req, res) => {
     }
   };
 
-//Delete CCP Category
-const deleteCCPCategory= async (req, res) => {
+//Delete Category
+const deleteCategory= async (req, res) => {
     try {
-      const deleted = await CCPCategories.findByIdAndDelete(req.params.id);
+      const deleted = await Categories.findByIdAndDelete(req.params.id);
   
       if (deleted) {
         res.status(200).json({
-          data: "CCP Category Deleted",
+          data: "Category Deleted",
           status: true,
         });
       } else {
         res.status(401).json({
-          errrorMessage: "Failed to delete the CCP Category!",
+          errrorMessage: "Failed to delete the Category!",
           status: false,
         });
       }
@@ -131,9 +131,9 @@ const deleteCCPCategory= async (req, res) => {
 
 //Export
 module.exports = {
-    addCCPCategory,
-    getAllCCPCategories,
-    getCCPCategory,
-    updateCCPCategory,
-    deleteCCPCategory
+    addCategory,
+    getAllCategories,
+    getCategory,
+    updateCategory,
+    deleteCategory
 }

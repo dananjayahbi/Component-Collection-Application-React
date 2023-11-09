@@ -21,29 +21,29 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
-import AddCustPCategory from "./AddCustomProjectCategory";
-import UpdateCustPCategory from "./UpdateCustomProjectCategory";
-import DeleteCustPCategory from "./DeleteCustomProjectCategory";
+import AddFPCategory from "./AddCategory";
+import UpdateFPCategory from "./UpdateCategory";
+import DeleteFPCategory from "./DeleteCategory";
 
-export default function CustomProjectCategories() {
-  const [CustPCategories, setCustPCategories] = useState([]);
-  const [filteredCustPCategories, setFilteredCustPCategories] = useState([]);
+export default function CCProjectCategories() {
+  const [FPCategories, setFPCategories] = useState([]);
+  const [filteredFPCategories, setFilteredFPCategories] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [openPopupAddCustPCategory, setOpenPopupAddCustPCategory] = useState(false); //Popup for NewBrand
-  const [openPopupUpdateCustPCategory, setOpenPopupUpdateCustPCategory] = useState(false); //Popup for UpdateBrand
-  const [openPopupDeleteCustPCategory, setOpenPopupDeleteCustPCategory] = useState(false); //Popup for DeleteBrand
-  const [fetchedCustPCategory, setFetchedCustPCategory] = useState(null); //for delete functionality
-  const [fetchedCUPCID, setFetchedCUPCID] = useState(null);
+  const [openPopupAddFPCategory, setOpenPopupAddFPCategory] = useState(false); //Popup for NewBrand
+  const [openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory] = useState(false); //Popup for UpdateBrand
+  const [openPopupDeleteFPCategory, setOpenPopupDeleteFPCategory] = useState(false); //Popup for DeleteBrand
+  const [fetchedFPCategory, setFetchedFPCategory] = useState(null); //for delete functionality
+  const [fetchedFPCID, setFetchedFPCID] = useState(null);
   const tableRef = useRef(null);
 
   
-  //Fetch All Cust P Categories
+  //Fetch All FP Categories
   useEffect(() => {
-    const fetchCustPCategories= async () => {
+    const fetchFPCategories= async () => {
       try {
-        const response = await fetch("http://localhost:8070/CustPCategories/getAllCustPCategories/");
+        const response = await fetch("http://localhost:8070/Categories/getAllCategories/");
         const data = await response.json();
-        setCustPCategories(data);
+        setFPCategories(data);
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -51,8 +51,8 @@ export default function CustomProjectCategories() {
       }
     };
 
-    fetchCustPCategories();
-  }, [openPopupAddCustPCategory, openPopupUpdateCustPCategory, openPopupDeleteCustPCategory]);
+    fetchFPCategories();
+  }, [openPopupAddFPCategory, openPopupUpdateFPCategory, openPopupDeleteFPCategory]);
 
   //Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,31 +61,31 @@ export default function CustomProjectCategories() {
   };
 
   useEffect(() => {
-    const filtered = CustPCategories.filter((Category) => 
+    const filtered = FPCategories.filter((Category) => 
       (Category.categoryName && Category.categoryName.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-    setFilteredCustPCategories(filtered);
-  }, [CustPCategories, searchTerm]);
+    setFilteredFPCategories(filtered);
+  }, [FPCategories, searchTerm]);
 
 
   //Handle Update
-  function handleUpdate(CUPCID){
-    setFetchedCUPCID(CUPCID);
-    setOpenPopupUpdateCustPCategory(true);
+  function handleUpdate(FPCID){
+    setFetchedFPCID(FPCID);
+    setOpenPopupUpdateFPCategory(true);
   }
 
   //Handle Delete
-  function handleDelete(CUPCID, Category){
-    setFetchedCustPCategory(Category);
-    setFetchedCUPCID(CUPCID);
-    setOpenPopupDeleteCustPCategory(true);
+  function handleDelete(FPCID, Category){
+    setFetchedFPCategory(Category);
+    setFetchedFPCID(FPCID);
+    setOpenPopupDeleteFPCategory(true);
   }
 
   
   return (
     <Box p={1}>
       <Box>
-        <Typography variant="h5">Custom Project Categories</Typography>
+        <Typography variant="h5">Component Categories</Typography>
         <Divider sx={{ mt: 2, mb: 7.5 }} />
       </Box>
 
@@ -114,7 +114,7 @@ export default function CustomProjectCategories() {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => {setOpenPopupAddCustPCategory(true)}}
+          onClick={() => {setOpenPopupAddFPCategory(true)}}
           sx={{ mt: -2, height: "40px" }}
         >
           Add Category
@@ -136,22 +136,22 @@ export default function CustomProjectCategories() {
                   <CircularProgress />
                 </TableCell>
               </TableRow>
-            ) : filteredCustPCategories.length === 0 ? ( // Display "No matching records found"
+            ) : filteredFPCategories.length === 0 ? ( // Display "No matching records found"
               <TableRow>
                 <TableCell colSpan={7} align="center">
                   No matching records found
                 </TableCell>
               </TableRow>
             ) : (
-                filteredCustPCategories.map((Catrgory) => (
-                <TableRow key={Catrgory._id}>
-                  <TableCell>{Catrgory.categoryName}</TableCell>
-                  <TableCell>{Catrgory.description}</TableCell>
+              filteredFPCategories.map((Category) => (
+                <TableRow key={Category._id}>
+                  <TableCell style={{ whiteSpace: 'pre-line', height: 'auto' }}>{Category.categoryName}</TableCell>
+                  <TableCell style={{ whiteSpace: 'pre-line', height: 'auto' }}>{Category.description}</TableCell>
                   <TableCell>
-                    <IconButton onClick={()=>{handleUpdate(Catrgory._id)}}>
+                    <IconButton onClick={() => { handleUpdate(Category._id) }}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={()=>{handleDelete(Catrgory._id, Catrgory.categoryName)}}>
+                    <IconButton onClick={() => { handleDelete(Category._id, Category.categoryName) }}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -161,16 +161,16 @@ export default function CustomProjectCategories() {
             {/* Display the count of records */}
             <TableRow>
               <TableCell colSpan={7} align="left">
-                Total Categories : {filteredCustPCategories.length}
+                Total Categories : {filteredFPCategories.length}
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
 
-      <AddCustPCategory openPopupAddCustPCategory={openPopupAddCustPCategory} setOpenPopupAddCustPCategory={setOpenPopupAddCustPCategory}></AddCustPCategory>
-      <UpdateCustPCategory openPopupUpdateCustPCategory={openPopupUpdateCustPCategory} setOpenPopupUpdateCustPCategory={setOpenPopupUpdateCustPCategory} CUPCID = {fetchedCUPCID}></UpdateCustPCategory>
-      <DeleteCustPCategory openPopupDeleteCustPCategory={openPopupDeleteCustPCategory} setOpenPopupDeleteCustPCategory={setOpenPopupDeleteCustPCategory} CUPCID = {fetchedCUPCID} categoryName = {fetchedCustPCategory}></DeleteCustPCategory>
+      <AddFPCategory openPopupAddFPCategory={openPopupAddFPCategory} setOpenPopupAddFPCategory={setOpenPopupAddFPCategory}></AddFPCategory>
+      <UpdateFPCategory openPopupUpdateFPCategory={openPopupUpdateFPCategory} setOpenPopupUpdateFPCategory={setOpenPopupUpdateFPCategory} FPCID = {fetchedFPCID}></UpdateFPCategory>
+      <DeleteFPCategory openPopupDeleteFPCategory={openPopupDeleteFPCategory} setOpenPopupDeleteFPCategory={setOpenPopupDeleteFPCategory} FPCID = {fetchedFPCID} categoryName = {fetchedFPCategory}></DeleteFPCategory>
 
     </Box>
   );  

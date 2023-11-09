@@ -7,26 +7,8 @@ const addRole = async (req, res) => {
 
     // Transform permissions array from frontend data
     const pageNames = [
-      "Manage Fiverr Projects", 
-      "Monitor Fiverr Projects",
-      "FP Categories",
-      "Manage CodeCannyon Projects",
-      "Monitor CodeCannyon Projects",
-      "CCP Categories",
-      "Manage Custom Projects",
-      "Monitor Custom Projects",
-      "Custom Project Categories",
-      "Manage Finance",
-      "Monitor Finance",
-      "Users List",
-      "Roles List",
-      "Send SMS",
-      "SMS Templates",
-      "SMS API",
-      "Company Profile",
-      "Site Settings",
-      "Change Password",
-      "Database Backup"
+      "All Admin Permissions", 
+      "All User Permissions"
     ]; // Replace with actual page names
     const transformedPermissions = pageNames.map((pageName) => ({
       page: pageName,

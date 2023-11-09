@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
@@ -9,11 +9,13 @@ import {
   DialogContent,
   DialogTitle,
   Slide,
+  Box,
+  CircularProgress
 } from "@mui/material";
 import axios from "axios";
 import CustomTextField from "../../components/CustomTextField"
 import ClearIcon from "@mui/icons-material/Clear";
-import AddIcon from "@mui/icons-material/Add";
+import LoopIcon from '@mui/icons-material/Loop';
 import { useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
 
@@ -22,56 +24,75 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-// FORMIK
-const INITIAL_FORM_STATE = {
-  categoryName: "",
-  description: "",
-};
-
 //YUP validations
 const validationSchema = Yup.object({
-    categoryName: Yup.string().required("Category name is required"),
-    description: Yup.string().required("Description is required"),
-});  
-
-const apiUrl = "http://localhost:8070/CustPCategories/addCustPCategory/"; // Change to your API URL
+  categoryName: Yup.string().required("Category Name is required"),
+  description: Yup.string().required("Description is required"),
+});
 
 //The Main function
-export default function AddCustPCategory(props) {
+export default function UpdateFPCategory(props) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
+
+  const apiUrl = `http://localhost:8070/Categories/updateCategory/${props.FPCID}`; // Change to your API URL
+
   const navigate = useNavigate();
-  const { openPopupAddCustPCategory, setOpenPopupAddCustPCategory } = props;
-
-  const handleSubmit = async (values, { setSubmitting }) => {
-    try {
-      const dataToSend = {
-        categoryName: values.categoryName,
-        description: values.description,
-      }
-
-      await axios.post(apiUrl, dataToSend);
-      sessionStorage.setItem("CustPCategoryCreated", "1");
-      navigate("/customproj/CustPCategories");
-    } catch (error) {
-      setNotify({
-        isOpen: true,
-        message: err.response.data.errorMessage,
-        type: "error",
-      });
-    } finally {
-      setSubmitting(false);
-      setOpenPopupAddCustPCategory(false);
+  const { openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory } = props;
+  const [fetchedFPCategoryData, setFetchedFPCategoryData] = useState();
+  const [loading, setLoading] = useState(true);
+  
+    async function getFPCategory() {
+        setLoading(true);
+        await axios
+            .get(`http://localhost:8070/Categories/getCategory/${props.FPCID}`)
+            .then((res) => {
+                setFetchedFPCategoryData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }
-  };
+
+    useEffect(() =>{
+        if (props.FPCID != null){
+            getFPCategory();
+        }
+    }, [props, openPopupUpdateFPCategory]);
+
+
+    const handleSubmit = async (values, { setSubmitting }) => {
+      try {
+        const dataToSend = {
+          categoryName: values.categoryName,
+          description: values.description,
+        };
+  
+        await axios.put(apiUrl, dataToSend);
+        sessionStorage.setItem("CategoryUpdated", "1");
+        navigate("/CMCategories");
+      } catch (error) {
+        setNotify({
+          isOpen: true,
+          message: err.response.data.errorMessage,
+          type: "error",
+        });
+      } finally {
+        setSubmitting(false);
+        setOpenPopupUpdateFPCategory(false);
+      }
+    };
 
   return (
     <Dialog
-      open={openPopupAddCustPCategory}
-      onBackdropClick={() => setOpenPopupAddCustPCategory(false)}
+      open={openPopupUpdateFPCategory}
+      onBackdropClick={() => setOpenPopupUpdateFPCategory(false)}
       maxWidth="md"
       TransitionComponent={Transition}
       PaperProps={{
@@ -82,7 +103,7 @@ export default function AddCustPCategory(props) {
         <DialogTitle>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <p className="popupTitle">Add Category</p>
+            <p className="popupTitle">Update Component Category</p>
           </div>
         </div>
 
@@ -99,8 +120,16 @@ export default function AddCustPCategory(props) {
         </DialogTitle>
 
         <DialogContent>
+        {loading ? (
+            <Box display="flex" justifyContent="center">
+                <CircularProgress />
+            </Box>
+        ) : (
           <Formik
-            initialValues={{INITIAL_FORM_STATE}}
+            initialValues={{
+                categoryName: fetchedFPCategoryData?.categoryName || "",
+                description: fetchedFPCategoryData?.description || "",
+            }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
@@ -111,16 +140,15 @@ export default function AddCustPCategory(props) {
               </Grid>
 
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="description" label="Description"  multiline rows={6} />
+                <CustomTextField name="description" label="Description" multiline rows={6}/>
               </Grid>
-
 
               <div style={{ display: "flex", justifyContent: "right", marginTop: "1rem" }}>
                 <Button
                   startIcon={<ClearIcon />}
                   style={{marginRight: "15px"}}
                   onClick={() => {
-                    setOpenPopupAddCustPCategory(false);
+                    setOpenPopupUpdateFPCategory(false);
                   }}
                   variant="outlined"
                   color="primary"
@@ -132,14 +160,15 @@ export default function AddCustPCategory(props) {
                   variant="contained"
                   color="primary"
                   disabled={isSubmitting}
-                  startIcon={<AddIcon />}
+                  startIcon={<LoopIcon />}
                 >
-                  Add
+                  Update
                 </Button>
               </div>
             </Form>
             )}
           </Formik>
+        )}
         </DialogContent>
       </div>
     </Dialog>

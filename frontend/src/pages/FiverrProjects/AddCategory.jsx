@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import CustomTextField from "../../components/CustomTextField"
 import ClearIcon from "@mui/icons-material/Clear";
-import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
 
@@ -24,67 +24,65 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 // FORMIK
 const INITIAL_FORM_STATE = {
-    projectName : "",
+  categoryName: "",
+  description: "",
 };
 
 //YUP validations
 const validationSchema = Yup.object({
-    projectName: Yup.string().required("Project Name is required")
-});
+    categoryName: Yup.string().required("Category name is required"),
+    description: Yup.string().required("Description is required"),
+});  
+
+const apiUrl = "http://localhost:8070/Categories/addCategory/"; // Change to your API URL
 
 //The Main function
-export default function DeleteFProject(props) {
+export default function AddFPCategory(props) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
   const navigate = useNavigate();
-  const { openPopupDeleteFProject, setOpenPopupDeleteFProject } = props;
-
-  const apiUrl = `http://localhost:8070/fiverrProjects/deleteFiverrProject/${props.FPID}`; // Change to your API URL
-
+  const { openPopupAddFPCategory, setOpenPopupAddFPCategory } = props;
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    if (props.projectName == values.projectName) {
-        try {
-            await axios.delete(apiUrl, values);
-            sessionStorage.setItem("FProjectDeleted", "1");
-            navigate("/fiverr/ManageFProjects")
-        } catch (error) {
-        setNotify({
-            isOpen: true,
-            message: err.response.data.errorMessage,
-            type: "error",
-        });
-        } finally {
-        setSubmitting(false);
-        setOpenPopupDeleteFProject(false);
-        }
-    } else {
-        setNotify({
-            isOpen: true,
-            message: "Project name is not matching!",
-            type: "error",
-        });
+    try {
+      const dataToSend = {
+        categoryName: values.categoryName,
+        description: values.description,
+      }
+
+      await axios.post(apiUrl, dataToSend);
+      sessionStorage.setItem("CategoryCreated", "1");
+      navigate("/CMCategories");
+    } catch (error) {
+      setNotify({
+        isOpen: true,
+        message: err.response.data.errorMessage,
+        type: "error",
+      });
+    } finally {
+      setSubmitting(false);
+      setOpenPopupAddFPCategory(false);
     }
   };
 
   return (
     <Dialog
-      open={openPopupDeleteFProject}
-      onBackdropClick={() => setOpenPopupDeleteFProject(false)}
-      maxWidth="sm"
+      open={openPopupAddFPCategory}
+      onBackdropClick={() => setOpenPopupAddFPCategory(false)}
+      maxWidth="md"
       TransitionComponent={Transition}
       PaperProps={{
-          style: { borderRadius: 10, width: "25%", padding: "20px", paddingBottom: "30px"},
+          style: { borderRadius: 10, width: "80%", padding: "20px", paddingBottom: "30px"},
       }}
     >
       <div className="popup">
         <DialogTitle>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <p className="popupTitle">Delete Fiverr Project</p>
+            <p className="popupTitle">Add Category</p>
           </div>
         </div>
 
@@ -106,10 +104,14 @@ export default function DeleteFProject(props) {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, values }) => (
             <Form>
               <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="projectName" label="Type Project name to confirm delete ..." />
+                <CustomTextField name="categoryName" label="Category Name" />
+              </Grid>
+
+              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
+                <CustomTextField name="description" label="Description"  multiline rows={6} />
               </Grid>
 
 
@@ -118,7 +120,7 @@ export default function DeleteFProject(props) {
                   startIcon={<ClearIcon />}
                   style={{marginRight: "15px"}}
                   onClick={() => {
-                    setOpenPopupDeleteFProject(false);
+                    setOpenPopupAddFPCategory(false);
                   }}
                   variant="outlined"
                   color="primary"
@@ -130,9 +132,9 @@ export default function DeleteFProject(props) {
                   variant="contained"
                   color="primary"
                   disabled={isSubmitting}
-                  startIcon={<DeleteIcon />}
+                  startIcon={<AddIcon />}
                 >
-                  Delete
+                  Add
                 </Button>
               </div>
             </Form>

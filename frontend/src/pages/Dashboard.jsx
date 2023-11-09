@@ -13,8 +13,7 @@ import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SiteSettings from './Settings/SiteSettings';
 import DatabaseBackup from './Settings/DatabaseBackup';
-import FProjectCategories from './FiverrProjects/FProjectCategories';
-import ManageFPTasks from './FiverrProjects/FPTasks';
+import FProjectCategories from './FiverrProjects/Categories';
 import Notification from '../components/Notification';
 import axios from "axios";
 
@@ -116,31 +115,31 @@ function Dashboard() {
       sessionStorage.removeItem("roleDeleted");
     }
 
-    if (sessionStorage.getItem("FPCategoryCreated") == "1") {
+    if (sessionStorage.getItem("CategoryCreated") == "1") {
       setNotify({
         isOpen: true,
-        message: "FP Category Created Successfully!",
+        message: "Category Created Successfully!",
         type: "success",
       });
-      sessionStorage.removeItem("FPCategoryCreated");
+      sessionStorage.removeItem("CategoryCreated");
     }
 
-    if (sessionStorage.getItem("FPCategoryUpdated") == "1") {
+    if (sessionStorage.getItem("CategoryUpdated") == "1") {
       setNotify({
         isOpen: true,
-        message: "FP Category Updated Successfully!",
+        message: "Category Updated Successfully!",
         type: "success",
       });
-      sessionStorage.removeItem("FPCategoryUpdated");
+      sessionStorage.removeItem("CategoryUpdated");
     }
 
-    if (sessionStorage.getItem("FPCategoryDeleted") == "1") {
+    if (sessionStorage.getItem("CategoryDeleted") == "1") {
       setNotify({
         isOpen: true,
-        message: "FP Category Deleted Successfully!",
+        message: "Category Deleted Successfully!",
         type: "success",
       });
-      sessionStorage.removeItem("FPCategoryDeleted");
+      sessionStorage.removeItem("CategoryDeleted");
     }
 
     if (sessionStorage.getItem("FProjectCreated") == "1") {
@@ -205,10 +204,9 @@ function Dashboard() {
               {/* Define routes and load corresponding components */}
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/fiverr/ManageFProjects" element={<ManageFProjects />} />
+                <Route path="/NewComponent" element={<ManageFProjects />} />
                 <Route path="/fiverr/MonitorFProjects" element={<MonitorFProjects />} />
-                <Route path="/fiverr/FPCategories" element={<FProjectCategories />} />
-                <Route path="/fiverr/ManageFPTasks" element={<ManageFPTasks />} />
+                <Route path="/CMCategories" element={<FProjectCategories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
                 <Route path="/settings/siteSettings" element={<SiteSettings />} />
