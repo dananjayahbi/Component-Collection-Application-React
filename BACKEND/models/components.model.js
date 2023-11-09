@@ -29,6 +29,7 @@ const newComponent = new Schema(
       {
         language: String,
         code: String,
+        notes: String,
       }
     ]
   },
