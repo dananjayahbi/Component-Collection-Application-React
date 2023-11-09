@@ -241,7 +241,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <div className="flex items-center">
                             <AccountTreeIcon/>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Fiverr Projects
+                              Manage
                             </span>
                           </div>
                           {/* Icon */}
@@ -254,24 +254,24 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Manage Fiverr Projects") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/fiverr/ManageFProjects"
+                                to="/NewComponent"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
                                 <ConstructionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Manage Projects
+                                  New Component
                                 </span>
                               </NavLink>
                             </li>
                           ): null}
 
-                          {checkPageAccess("Monitor Fiverr Projects") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -288,324 +288,18 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("FP Categories") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/fiverr/FPCategories"
+                                to="/CMCategories"
                                 className={({ isActive }) =>
                                   'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                                 }
                               >
                                 <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  FP Categories
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-              {/* Codecannyon Projects */}
-              <SidebarLinkGroup activecondition={pathname.includes('codecannyonProjects')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <BusinessIcon/>
-                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                            Codecannyon Proj.
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Manage CodeCannyon Projects") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/codecannyon/ManageCCProjects"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <AccountTreeIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Manage Projects
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Monitor CodeCannyon Projects") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/codecannyon/MonitorCCProjects"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Monitor Projects
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("CCP Categories") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/codecannyon/CCPCategories"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  CCP Categories
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-              {/* Custom Projects */}
-              <SidebarLinkGroup activecondition={pathname.includes('customProjects')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <BrokenImageIcon/>
-                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                            Custom Projects
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Manage Custom Projects") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/customproj/ManageCUProjects"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <AccountTreeIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Manage Projects
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Monitor Custom Projects") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/customproj/MonitorCUProjects"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Monitor Projects
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Custom Project Categories") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/customproj/CustPCategories"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <ConnectedTvIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  CustP Categories
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-              {/* Finance */}
-              <SidebarLinkGroup activecondition={pathname.includes('finance')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <AttachMoneyIcon/>
-                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                            Finance
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          {checkPageAccess("Manage Finance") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/finance/ManageFinance"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <CalculateIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Manage Finance
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Monitor Finance") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/finance/MonitorFinance"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <ContactlessIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Monitor Finance
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-
-              {/* Reports */}
-              <SidebarLinkGroup activecondition={pathname.includes('reports')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('reports') ? 'hover:text-slate-200' : 'hover:text-white'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <AssessmentIcon/>
-                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Reports
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-
-                          {checkPageAccess("Profit & Loss Report") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/reports/profitLossReport"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <DescriptionIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Test node
+                                  CM Categories
                                 </span>
                               </NavLink>
                             </li>
@@ -689,96 +383,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   );
                 }}
               </SidebarLinkGroup>
-
-              {/* SMS */}
-              <SidebarLinkGroup activecondition={pathname.includes('sms')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes('sms') ? 'hover:text-slate-200' : 'hover:text-white'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <EmailIcon/>
-                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              SMS
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                        
-                          {checkPageAccess("Send SMS") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/sms/sendSMS"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <ForwardToInboxIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Send SMS
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS Templates") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/sms/smsTemplates"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <FormatListBulletedIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  SMS Templates
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("SMS API") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/sms/smsAPI"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <AllOutIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  SMS API
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
             </ul>
           </div>
 
@@ -826,24 +430,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
 
-                          {checkPageAccess("Company Profile") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/companyProfile"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <BadgeIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Company Profile
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Site Settings") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -860,24 +447,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ): null}
 
-                          {checkPageAccess("Change Password") ?(
-                            <li className="mb-1 last:mb-0">
-                              <NavLink
-                                end
-                                to="/settings/changePassword"
-                                className={({ isActive }) =>
-                                  'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
-                                }
-                              >
-                                <LockIcon sx={{ fontSize: 15 , marginRight:"5px" }}/>
-                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  Change Password
-                                </span>
-                              </NavLink>
-                            </li>
-                          ): null}
-
-                          {checkPageAccess("Database Backup") ?(
+                          {checkPageAccess("All Admin Permissions") ?(
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end

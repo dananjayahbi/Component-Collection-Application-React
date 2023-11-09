@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const newCCPCategory= new Schema(
+const newCategory= new Schema(
   {
     categoryName: {
       type: String,
@@ -18,6 +18,6 @@ const newCCPCategory= new Schema(
   }
 );
 
-const CCPCategories = mongoose.model("CCPCategories", newCCPCategory);
+const Categories = mongoose.model("Categories", newCategory);
 
-module.exports = CCPCategories;
+module.exports = Categories;

@@ -9,25 +9,11 @@ import {
 import Home from '../pages/Home';
 import ManageFProjects from './FiverrProjects/ManageFProjects'
 import MonitorFProjects from './FiverrProjects/MonitorFProjects'
-import ManageCCProjects from './CodecannyonProj/ManageCCProjects'
-import MonitorCCProjects from './CodecannyonProj/MonitorCCProjects'
-import ManageCUProjects from './CustomProjects/ManageCUProjects'
-import MonitorCUProjects from './CustomProjects/MonitorCUProjects'
-import ManageFinance from './Finance/ManageFinance'
-import MonitorFinance from './Finance/MonitorFinance'
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
-import SendSMS from './SMS/SendSMS';
-import SMSTemplates from './SMS/SMSTemplstes';
-import SMSAPI from './SMS/SMSAPI';
-import CompanyProfile from './Settings/CompanyProfile';
 import SiteSettings from './Settings/SiteSettings';
-import ChangePassword from './Settings/ChangePassword';
 import DatabaseBackup from './Settings/DatabaseBackup';
-import FProjectCategories from './FiverrProjects/FProjectCategories';
-import CCProjectCategories from './CodecannyonProj/CCProjectCategories';
-import CustomProjectCategories from './CustomProjects/CustomProjectCategories';
-import ManageFPTasks from './FiverrProjects/FPTasks';
+import FProjectCategories from './FiverrProjects/Categories';
 import Notification from '../components/Notification';
 import axios from "axios";
 
@@ -129,58 +115,31 @@ function Dashboard() {
       sessionStorage.removeItem("roleDeleted");
     }
 
-    if (sessionStorage.getItem("FPCategoryCreated") == "1") {
+    if (sessionStorage.getItem("CategoryCreated") == "1") {
       setNotify({
         isOpen: true,
-        message: "FP Category Created Successfully!",
+        message: "Category Created Successfully!",
         type: "success",
       });
-      sessionStorage.removeItem("FPCategoryCreated");
+      sessionStorage.removeItem("CategoryCreated");
     }
 
-    if (sessionStorage.getItem("FPCategoryUpdated") == "1") {
+    if (sessionStorage.getItem("CategoryUpdated") == "1") {
       setNotify({
         isOpen: true,
-        message: "FP Category Updated Successfully!",
+        message: "Category Updated Successfully!",
         type: "success",
       });
-      sessionStorage.removeItem("FPCategoryUpdated");
+      sessionStorage.removeItem("CategoryUpdated");
     }
 
-    if (sessionStorage.getItem("FPCategoryDeleted") == "1") {
+    if (sessionStorage.getItem("CategoryDeleted") == "1") {
       setNotify({
         isOpen: true,
-        message: "FP Category Deleted Successfully!",
+        message: "Category Deleted Successfully!",
         type: "success",
       });
-      sessionStorage.removeItem("FPCategoryDeleted");
-    }
-
-    if (sessionStorage.getItem("CCPCategoryCreated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "CCP Category Created Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CCPCategoryCreated");
-    }
-
-    if (sessionStorage.getItem("CCPCategoryUpdated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "CCP Category Updated Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CCPCategoryUpdated");
-    }
-
-    if (sessionStorage.getItem("CCPCategoryDeleted") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "CCP Category Deleted Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CCPCategoryDeleted");
+      sessionStorage.removeItem("CategoryDeleted");
     }
 
     if (sessionStorage.getItem("FProjectCreated") == "1") {
@@ -208,114 +167,6 @@ function Dashboard() {
         type: "success",
       });
       sessionStorage.removeItem("FProjectDeleted");
-    }
-
-    if (sessionStorage.getItem("CCProjectCreated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "CodeCannyon project Created Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CCProjectCreated");
-    }
-
-    if (sessionStorage.getItem("CCProjectUpdated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "CodeCannyon project Updated Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CCProjectUpdated");
-    }
-
-    if (sessionStorage.getItem("CCProjectDeleted") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "CodeCannyon project Deleted Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CCProjectDeleted");
-    }
-
-    if (sessionStorage.getItem("CustPCategoryCreated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Custom project Category Created Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CustPCategoryCreated");
-    }
-
-    if (sessionStorage.getItem("CustPCategoryUpdated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Custom project Category Updated Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CustPCategoryUpdated");
-    }
-
-    if (sessionStorage.getItem("CustPCategoryDeleted") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Custom project Category Deleted Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CustPCategoryDeleted");
-    }
-
-    if (sessionStorage.getItem("CustProjectCreated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Custom project Created Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CustProjectCreated");
-    }
-
-    if (sessionStorage.getItem("CustProjectUpdated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Custom project Updated Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CustProjectUpdated");
-    }
-
-    if (sessionStorage.getItem("CustProjectDeleted") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Custom project Deleted Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("CustProjectDeleted");
-    }
-
-    if (sessionStorage.getItem("FPTaskAdded") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Task Added Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("FPTaskAdded");
-    }
-
-    if (sessionStorage.getItem("FPTaskUpdated") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Task Updated Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("FPTaskUpdated");
-    }
-
-    if (sessionStorage.getItem("FPTaskDeleted") == "1") {
-      setNotify({
-        isOpen: true,
-        message: "Task Deleted Successfully!",
-        type: "success",
-      });
-      sessionStorage.removeItem("FPTaskDeleted");
     }
   });
 
@@ -353,26 +204,12 @@ function Dashboard() {
               {/* Define routes and load corresponding components */}
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/fiverr/ManageFProjects" element={<ManageFProjects />} />
+                <Route path="/NewComponent" element={<ManageFProjects />} />
                 <Route path="/fiverr/MonitorFProjects" element={<MonitorFProjects />} />
-                <Route path="/fiverr/FPCategories" element={<FProjectCategories />} />
-                <Route path="/fiverr/ManageFPTasks" element={<ManageFPTasks />} />
-                <Route path="/codecannyon/ManageCCProjects" element={<ManageCCProjects />} />
-                <Route path="/codecannyon/MonitorCCProjects" element={<MonitorCCProjects />} />
-                <Route path="/codecannyon/CCPCategories" element={<CCProjectCategories />} />
-                <Route path="/customproj/ManageCUProjects" element={<ManageCUProjects />} />
-                <Route path="/customproj/MonitorCUProjects" element={<MonitorCUProjects />} />
-                <Route path="/customproj/CustPCategories" element={<CustomProjectCategories />} />
-                <Route path="/finance/ManageFinance" element={<ManageFinance />} />
-                <Route path="/finance/MonitorFinance" element={<MonitorFinance />} />
+                <Route path="/CMCategories" element={<FProjectCategories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
-                <Route path="/sms/sendSMS" element={<SendSMS />} />
-                <Route path="/sms/smsTemplates" element={<SMSTemplates />} />
-                <Route path="/sms/smsAPI" element={<SMSAPI />} />
-                <Route path="/settings/companyProfile" element={<CompanyProfile />} />
                 <Route path="/settings/siteSettings" element={<SiteSettings />} />
-                <Route path="/settings/changePassword" element={<ChangePassword />} />
                 <Route path="/settings/databaseBackup" element={<DatabaseBackup />} />
               </Routes>
             </div>

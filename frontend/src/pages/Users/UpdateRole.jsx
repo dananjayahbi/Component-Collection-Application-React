@@ -38,14 +38,8 @@ const validationSchema = Yup.object({
 });
 
 const mainSelections = [
-  { name: "Fiverr Projects", subs: ["Manage Fiverr Projects", "Monitor Fiverr Projects", "FP Categories"] },
-  { name: "CodeCannyon Projects", subs: ["Manage CodeCannyon Projects", "Monitor CodeCannyon Projects", "CCP Categories"] },
-  { name: "Custom Projects", subs: ["Manage Custom Projects","Monitor Custom Projects", "Custom Project Categories"] },
-  { name: "Finance", subs: ["Manage Finance", "Monitor Finance"] },
-  { name: "Repoets", subs: ["Test"] },
-  { name: "Users", subs: ["Users List", "Roles List"] },
-  { name: "SMS", subs: ["Send SMS", "SMS Templates", "SMS API"] },
-  { name: "Settings", subs: ["Company Profile", "Site Settings", "Change Password", "Database Backup"] },
+  { name: "Administrators", subs: ["All Admin Permissions"] },
+  { name: "Users", subs: ["All User Permissions"] }
   // Add more main selections and their sub-selections as needed
 ];
 

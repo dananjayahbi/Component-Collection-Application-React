@@ -13,17 +13,11 @@ app.use(cors());
 app.use(express.json());
 
 //Setting up routing
-app.use("/fiverrProjects", require("./routes/FiverrProjectRoutes"));
-app.use("/CCProjects", require("./routes/CCProjectRoutes"));
-app.use("/CustomProjects", require("./routes/CustomProjectRoutes"));
-app.use("/FPCategories", require("./routes/FProjectCategoriesRoutes"));
-app.use("/CCPCategories", require("./routes/CCProjectCategoriesRoutes"));
-app.use("/CustPCategories", require("./routes/CustPCategoriesRoutes"));
-app.use("/reports", require("./routes/ReportsRoutes"));
+app.use("/Components", require("./routes/ComponentsRoutes"));
+app.use("/Categories", require("./routes/ComponentCategoriesRoutes"));
 app.use("/users", require("./routes/UsersRoutes"));
 app.use("/roles", require("./routes/RolesRoutes"));
 app.use("/rolesPermissions", require("./routes/RolesPermissionsRoutes"));
-app.use("/sms", require("./routes/SMSRoutes"));
 
 app.listen(PORT, () => {
   console.log("Server up with port : " + PORT);
