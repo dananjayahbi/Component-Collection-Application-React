@@ -260,7 +260,7 @@ export default function ManageFProjects() {
             </TextField>
 
             <MonacoEditor
-              height="400"
+              height="1000"
               name={`codes[${index}].code`}
               language="javascript"
               theme="vs-dark"
@@ -268,6 +268,7 @@ export default function ManageFProjects() {
               options={{ 
                 selectOnLineNumbers: true,
                 automaticLayout: true,
+                padding: { top: 20, bottom: 20 },
               }}
               onChange={(value) => handleCodeFieldChange(value, index)}
             />
