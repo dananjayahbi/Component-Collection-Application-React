@@ -7,13 +7,14 @@ import {
   Navigate
 } from "react-router-dom";
 import Home from '../pages/Home';
-import ManageFProjects from './FiverrProjects/ManageFProjects'
-import MonitorFProjects from './FiverrProjects/MonitorFProjects'
+import ManageFProjects from './codeComponents/NewComponent'
+import MonitorFProjects from './codeComponents/MonitorFProjects'
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SiteSettings from './Settings/SiteSettings';
 import DatabaseBackup from './Settings/DatabaseBackup';
-import FProjectCategories from './FiverrProjects/Categories';
+import FProjectCategories from './codeComponents/Categories';
+import UpdateComponent from './codeComponents/UpdateComponent';
 import Notification from '../components/Notification';
 import axios from "axios";
 
@@ -168,6 +169,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("FProjectDeleted");
     }
+
+    if (sessionStorage.getItem("componentDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Component Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("componentDeleted");
+    }
   });
 
 
@@ -205,6 +215,7 @@ function Dashboard() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/NewComponent" element={<ManageFProjects />} />
+                <Route path="/UpdateComponent/:id" element={<UpdateComponent />} />
                 <Route path="/fiverr/MonitorFProjects" element={<MonitorFProjects />} />
                 <Route path="/CMCategories" element={<FProjectCategories />} />
                 <Route path="/users/usersList" element={<UsersList />} />

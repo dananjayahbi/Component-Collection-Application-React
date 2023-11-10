@@ -15,7 +15,7 @@ import Notification from "../../components/Notification";
 import MonacoEditor from 'react-monaco-editor';
 
 
-export default function ManageFProjects() {
+export default function NewComponent() {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",

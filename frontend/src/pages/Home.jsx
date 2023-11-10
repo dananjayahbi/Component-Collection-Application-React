@@ -46,8 +46,8 @@ export default function Home() {
       <Divider sx={{ mt: 2, mb: 2.5 }} />
 
       <Formik initialValues={{ category: "" }} onSubmit={handleSubmit}>
-        <Form style={{display:"flex",justifyContent:"center",marginBottom: "20px"}}>
-          <Grid container spacing={2} style={{width:"500px"}}>
+        <Form style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+          <Grid container spacing={2} style={{ width: "500px" }}>
             <Grid item xs={12}>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel id="category-label">Select Category</InputLabel>
@@ -76,21 +76,18 @@ export default function Home() {
         {filteredComponents.map((component) => (
           <Grid item key={component.id} xs={12} sm={6}>
             <Card sx={{ maxWidth: 645 }}>
-              <CardMedia
-                component="img"
-                height="140"
-                image={component.imageURL}
-                alt={component.componentName}
-              />
+              <CardMedia component="img" height="140" image={component.imageURL} alt={component.componentName} />
               <CardContent>
                 <Typography variant="h6" component="div">
                   {component.componentName}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">
-                  View
-                </Button>
+                <a href={`/updateComponent/${component._id}`} style={{ textDecoration: "none" }}>
+                  <Button size="small" color="primary">
+                    View or Update
+                  </Button>
+                </a>
               </CardActions>
             </Card>
           </Grid>
