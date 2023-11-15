@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Notification from "../../components/Notification";
 import MonacoEditor from 'react-monaco-editor';
+import { useNavigate } from "react-router-dom";
 
 
 export default function NewComponent() {
@@ -24,6 +25,7 @@ export default function NewComponent() {
 
   const [categories, setCategories] = useState([]);
   const [IMGURL, setIMGURL] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     formik.handleChange(event);
@@ -56,7 +58,7 @@ export default function NewComponent() {
       notes: "",
       codes: [{ language: "", code: "", notes: "" }],
     },
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values) => {
       try {
         const response = await axios.post(
           "http://localhost:8070/Components/addComponent",
@@ -64,22 +66,8 @@ export default function NewComponent() {
         );
 
         if (response.status === 200) {
-          setNotify({
-            isOpen: true,
-            message: "Component Added Successfully!",
-            type: "success",
-          });
-                  // Reset the entire form
-          resetForm({
-            values: {
-              componentName: "",
-              category: "",
-              imageURL: "",
-              description: "",
-              notes: "",
-              codes: [{ language: "", code: "", notes: "" }],
-            },
-          });
+          sessionStorage.setItem("componentAdded", "1");
+          window.location.reload();
         } else {
           setNotify({
             isOpen: true,

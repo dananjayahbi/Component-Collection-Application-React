@@ -8,12 +8,12 @@ import {
 } from "react-router-dom";
 import Home from '../pages/Home';
 import ManageFProjects from './codeComponents/NewComponent'
-import MonitorFProjects from './codeComponents/MonitorFProjects'
+import OtherCodes from './codeComponents/OtherCodes'
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SiteSettings from './Settings/SiteSettings';
 import DatabaseBackup from './Settings/DatabaseBackup';
-import FProjectCategories from './codeComponents/Categories';
+import Categories from './codeComponents/Categories';
 import UpdateComponent from './codeComponents/UpdateComponent';
 import Notification from '../components/Notification';
 import axios from "axios";
@@ -170,6 +170,15 @@ function Dashboard() {
       sessionStorage.removeItem("FProjectDeleted");
     }
 
+    if (sessionStorage.getItem("componentAdded") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Component Added Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("componentAdded");
+    }
+
     if (sessionStorage.getItem("componentDeleted") == "1") {
       setNotify({
         isOpen: true,
@@ -216,8 +225,8 @@ function Dashboard() {
                 <Route path="/" element={<Home />} />
                 <Route path="/NewComponent" element={<ManageFProjects />} />
                 <Route path="/UpdateComponent/:id" element={<UpdateComponent />} />
-                <Route path="/fiverr/MonitorFProjects" element={<MonitorFProjects />} />
-                <Route path="/CMCategories" element={<FProjectCategories />} />
+                <Route path="/otherCodes" element={<OtherCodes />} />
+                <Route path="/CMCategories" element={<Categories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
                 <Route path="/settings/siteSettings" element={<SiteSettings />} />

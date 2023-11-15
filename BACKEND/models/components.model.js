@@ -38,6 +38,6 @@ const newComponent = new Schema(
   }
 );
 
-const Components = mongoose.model("FiverrProjects", newComponent);
+const Components = mongoose.model("Components", newComponent);
 
 module.exports = Components;
