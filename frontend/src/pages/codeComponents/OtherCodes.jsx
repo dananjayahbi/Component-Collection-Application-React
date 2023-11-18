@@ -5,5 +5,6 @@ export default function OtherCodes() {
     <div>
         <span>Other Codes</span>
     </div>
-  );
+  ); 
 }
+ 
