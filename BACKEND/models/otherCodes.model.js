@@ -20,6 +20,13 @@ const newOtherCode = new Schema(
       {
         imgURL: String,
       }
+    ],
+    codes: [
+      {
+        language: String,
+        code: String,
+        notes: String,
+      }
     ]
   },
   {

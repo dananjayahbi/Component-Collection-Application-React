@@ -40,7 +40,6 @@ export default function NewComponent() {
   const handleCodeFieldChange = (value, index) => {
     const updatedCodes = [...formik.values.codes];
     updatedCodes[index].code = value;
-  
     formik.handleChange({
       target: {
         name: `codes[${index}].code`,

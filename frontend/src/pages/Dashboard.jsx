@@ -9,6 +9,7 @@ import {
 import Home from '../pages/Home';
 import ManageFProjects from './codeComponents/NewComponent'
 import OtherCodes from './codeComponents/OtherCodes'
+import AddOtherCode from './codeComponents/AddOtherCode'
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SiteSettings from './Settings/SiteSettings';
@@ -187,6 +188,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("componentDeleted");
     }
+
+    if (sessionStorage.getItem("NoteAdded") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Note Added Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("NoteAdded");
+    }
   });
 
 
@@ -226,6 +236,7 @@ function Dashboard() {
                 <Route path="/NewComponent" element={<ManageFProjects />} />
                 <Route path="/UpdateComponent/:id" element={<UpdateComponent />} />
                 <Route path="/otherCodes" element={<OtherCodes />} />
+                <Route path="/AddOtherCode" element={<AddOtherCode />} />
                 <Route path="/CMCategories" element={<Categories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />

@@ -18,7 +18,7 @@ function generateRandomOTID() {
 
 // Add OtherCode
 const addOtherCode = async (req, res) => {
-  const { title, note, imageURLs } = req.body;
+  const { title, note, imageURLs, codes } = req.body;
 
   let existingOtherCode;
   let otherCode;
@@ -36,6 +36,7 @@ const addOtherCode = async (req, res) => {
     title,
     note,
     imageURLs,
+    codes
   });
 
   if (otherCode) {
@@ -73,6 +74,7 @@ const getOtherCode = async (req, res) => {
         title,
         note,
         imageURLs,
+        codes
       } = otherCodeObject;
   
       res.status(200).json({
@@ -81,6 +83,7 @@ const getOtherCode = async (req, res) => {
         title,
         note,
         imageURLs,
+        codes
       });
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
@@ -94,12 +97,14 @@ const updateOtherCode = async (req, res) => {
         title,
         note,
         imageURLs,
+        codes
       } = req.body;
   
       let updateData = {
         title,
         note,
         imageURLs,
+        codes
       };
   
       // Updating
