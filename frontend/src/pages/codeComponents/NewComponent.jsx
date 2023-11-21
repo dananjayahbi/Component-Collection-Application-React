@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -54,6 +53,7 @@ export default function NewComponent() {
     initialValues: {
       componentName: "",
       category: "",
+      mainTechnology: "",
       imageURL: "",
       description: "",
       notes: "",
@@ -151,6 +151,20 @@ export default function NewComponent() {
               {category}
             </MenuItem>
           ))}
+        </TextField>
+
+        {/* Main Technology Dropdown */}
+        <TextField
+          select
+          label="Main Technology"
+          fullWidth
+          margin="normal"
+          name="mainTechnology"
+          value={formik.values.mainTechnology}
+          onChange={formik.handleChange}
+        >
+          <MenuItem value="MERN">MERN</MenuItem>
+          <MenuItem value="HTML,CSS,JS,PHP,MYSQL">HTML,CSS,JS,PHP,MYSQL</MenuItem>
         </TextField>
 
         <TextField

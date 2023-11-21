@@ -16,6 +16,10 @@ const newComponent = new Schema(
       type: String,
       required: true,
     },
+    mainTechnology: {
+      type: String,
+      required: true,
+    },
     imageURL: {
         type: String,
     },
