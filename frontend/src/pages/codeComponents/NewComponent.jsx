@@ -111,13 +111,11 @@ export default function NewComponent() {
         console.error("Error fetching categories:", error);
       }
     };
-
     fetchCategories();
   }, []);
 
   return (
     <Box p={1}>
-      {/* NOTIFICATION */}
       <Notification notify={notify} setNotify={setNotify} />
       <form onSubmit={formik.handleSubmit}>
         <Box>
