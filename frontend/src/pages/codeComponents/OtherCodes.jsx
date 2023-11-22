@@ -21,8 +21,7 @@ export default function OtherCodes() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [openPopupVNU, setOpenPopupVNU] = useState(false);
-  const [openPopupDeleteOtherCode, setOpenPopupDeleteOtherCode] =
-    useState(false);
+  const [openPopupDeleteOtherCode, setOpenPopupDeleteOtherCode] = useState(false);
   const [FetchedOtherCode, setFetchedOtherCode] = useState(null);
 
   useEffect(() => {

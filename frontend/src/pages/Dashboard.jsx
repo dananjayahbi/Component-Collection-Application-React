@@ -18,6 +18,7 @@ import Categories from './codeComponents/Categories';
 import UpdateComponent from './codeComponents/UpdateComponent';
 import Notification from '../components/Notification';
 import LearnNodes from './codeComponents/LearnNodes';
+import AddLearningNode from './codeComponents/AddLearningNode';
 import axios from "axios";
 
 function Dashboard() {
@@ -216,6 +217,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("NoteDeleted");
     }
+
+    if (sessionStorage.getItem("NodeAdded") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Node Added Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("NodeAdded");
+    }
   });
 
 
@@ -257,6 +267,7 @@ function Dashboard() {
                 <Route path="/otherCodes" element={<OtherCodes />} />
                 <Route path="/AddOtherCode" element={<AddOtherCode />} />
                 <Route path="/learningNodes" element={<LearnNodes />} />
+                <Route path="/addLearningNode" element={<AddLearningNode />} />
                 <Route path="/CMCategories" element={<Categories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
