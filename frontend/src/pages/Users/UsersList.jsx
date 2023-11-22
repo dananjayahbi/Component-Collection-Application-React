@@ -30,7 +30,7 @@ import {
   TableChart as ExcelIcon,
   SaveAlt as CsvIcon,
 } from "@mui/icons-material";
-import FileUploadIcon from '@mui/icons-material/FileUpload';
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 import NewUser from "./NewUser";
 import UpdateUser from "./UpdateUser";
 import DeleteUser from "./DeleteUser";
@@ -39,7 +39,7 @@ import { useReactToPrint } from "react-to-print"; // For printing
 import jsPDF from "jspdf"; // For PDF export
 import * as XLSX from "xlsx"; // For Excel export
 import * as FileSaver from "file-saver"; // For CSV export
-import autoTable from 'jspdf-autotable'
+import autoTable from "jspdf-autotable";
 
 export default function UsersList({ setNotify }) {
   const [users, setUsers] = useState([]);
@@ -67,7 +67,7 @@ export default function UsersList({ setNotify }) {
     const minBrightness = 40; // Minimum brightness (0-100)
     const maxBrightness = 80; // Maximum brightness (0-100)
     const colorThreshold = 20; // Minimum difference between color channels
-  
+
     const getRandomChannel = () => Math.floor(Math.random() * 256);
     const isColorValid = (color) => {
       const brightness = (color.r * 299 + color.g * 587 + color.b * 114) / 1000;
@@ -79,7 +79,7 @@ export default function UsersList({ setNotify }) {
         color.b >= colorThreshold
       );
     };
-  
+
     let color;
     do {
       color = {
@@ -88,10 +88,10 @@ export default function UsersList({ setNotify }) {
         b: getRandomChannel(),
       };
     } while (!isColorValid(color));
-  
+
     return `rgb(${color.r},${color.g},${color.b})`;
   };
-  
+
   //Fetch All Users
   useEffect(() => {
     const fetchUsers = async () => {
@@ -116,22 +116,23 @@ export default function UsersList({ setNotify }) {
   };
 
   useEffect(() => {
-    const filtered = users.filter((user) => 
-      (user.username && user.username.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (user.mobile && user.mobile.toString().includes(searchTerm))
+    const filtered = users.filter(
+      (user) =>
+        (user.username &&
+          user.username.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (user.mobile && user.mobile.toString().includes(searchTerm))
     );
     setFilteredUsers(filtered);
   }, [users, searchTerm]);
 
-
   //Handle Update
-  function handleUpdate(UID){
+  function handleUpdate(UID) {
     setFetchedUID(UID);
     setOpenPopup2(true);
   }
 
   //Handle Delete
-  function handleDelete(UID, Uname){
+  function handleDelete(UID, Uname) {
     setFetchedUname(Uname);
     setFetchedUID(UID);
     setOpenPopup3(true);
@@ -142,42 +143,42 @@ export default function UsersList({ setNotify }) {
   const handleCustomPrint = useReactToPrint({
     content: () => customTableRef.current,
   });
-  
+
   const handleExportPDF = () => {
     const doc = new jsPDF();
-  
+
     const marginLeft = 10;
     const marginTop = 10;
     const contentWidth = doc.internal.pageSize.width - 2 * marginLeft;
-  
+
     doc.setFontSize(20);
     doc.setTextColor(38, 48, 92);
     doc.text("Users List Report", marginLeft, marginTop + 10);
-  
+
     const tableTop = 30; // Adjust this value to position the table
     const tableColWidth = contentWidth / 7;
-  
+
     doc.autoTable({
-      head: [['Username', 'Email', 'Status', 'Role', 'Mobile']],
-      body: filteredUsers.map(user => [
+      head: [["Username", "Email", "Status", "Role", "Mobile"]],
+      body: filteredUsers.map((user) => [
         user.username,
         user.email,
         user.status,
         user.role,
-        user.mobile
+        user.mobile,
       ]),
       startY: tableTop,
       margin: { left: marginLeft, top: marginTop + 20 },
       headStyles: { fillColor: [38, 48, 92] },
       bodyStyles: { textColor: [38, 48, 92] },
       columnStyles: { 0: { cellWidth: tableColWidth * 1.5 } }, // Adjust column widths as needed
-      theme: 'grid', // or 'striped'
-      styles: { overflow: 'linebreak' }
+      theme: "grid", // or 'striped'
+      styles: { overflow: "linebreak" },
     });
-  
-    doc.save('UsersList.pdf');
-  };  
-  
+
+    doc.save("UsersList.pdf");
+  };
+
   const handleExportExcel = () => {
     const xlsData = [];
     filteredUsers.forEach((user) => {
@@ -189,25 +190,31 @@ export default function UsersList({ setNotify }) {
         user.mobile,
       ]);
     });
-  
-    const worksheet = XLSX.utils.aoa_to_sheet([["Username", "Email", "Status", "Role", "Mobile"], ...xlsData]);
+
+    const worksheet = XLSX.utils.aoa_to_sheet([
+      ["Username", "Email", "Status", "Role", "Mobile"],
+      ...xlsData,
+    ]);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
-  
-    const blob = new Blob([s2ab(XLSX.write(workbook, { bookType: "xlsx", type: "binary" }))], {
-      type: "application/octet-stream",
-    });
-  
+
+    const blob = new Blob(
+      [s2ab(XLSX.write(workbook, { bookType: "xlsx", type: "binary" }))],
+      {
+        type: "application/octet-stream",
+      }
+    );
+
     FileSaver.saveAs(blob, "users.xlsx");
   };
-  
+
   function s2ab(s) {
     const buf = new ArrayBuffer(s.length);
     const view = new Uint8Array(buf);
     for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
     return buf;
-  }   
-  
+  }
+
   const handleExportCSV = () => {
     const csvData = [];
     filteredUsers.forEach((user) => {
@@ -219,7 +226,7 @@ export default function UsersList({ setNotify }) {
         user.mobile,
       ]);
     });
-  
+
     const csv = csvData.map((row) => row.join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     FileSaver.saveAs(blob, "users.csv");
@@ -228,10 +235,10 @@ export default function UsersList({ setNotify }) {
   // Helper function to format dates in YYYY-MM-DD format
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    return (
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+    );
   };
-
-  
 
   return (
     <Box p={1}>
@@ -248,36 +255,47 @@ export default function UsersList({ setNotify }) {
         Export
       </Button>
       <Box display="flex" justifyContent="flex-end" sx={{ mt: -3 }}>
-      <TextField
-        id="outlined-basic"
-        label="Search by Username or Mobile"
-        variant="outlined"
-        value={searchTerm}
-        onChange={handleSearchTermChange}
-        fullWidth
-        margin="dense"
-        style={{ width: "30%", marginInlineEnd: "10px", marginTop: "-20px", paddingTop: "5px" }}
-        InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
-        inputProps={{
-          style: {
-            textAlign: "left",
-            padding: "10px",
-            fontSize: "14px", // Reduce font size of input text
-            lineHeight: "1.4", // Vertically center the text
-          },
-          type: "search", // Change the type attribute
-        }}
-      />
+        <TextField
+          id="outlined-basic"
+          label="Search by Username or Mobile"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+          fullWidth
+          margin="dense"
+          style={{
+            width: "30%",
+            marginInlineEnd: "10px",
+            marginTop: "-20px",
+            paddingTop: "5px",
+          }}
+          InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
+          inputProps={{
+            style: {
+              textAlign: "left",
+              padding: "10px",
+              fontSize: "14px", // Reduce font size of input text
+              lineHeight: "1.4", // Vertically center the text
+            },
+            type: "search", // Change the type attribute
+          }}
+        />
 
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => {setOpenPopup(true)}}
+          onClick={() => {
+            setOpenPopup(true);
+          }}
           sx={{ mt: -2, height: "40px" }}
         >
           Create
         </Button>
-        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleCloseMenu}
+        >
           <MenuItem onClick={handleCustomPrint} sx={{ fontSize: "12px" }}>
             <ListItemIcon style={{ minWidth: "32px" }}>
               <PrintIcon style={{ fontSize: 18 }} />
@@ -304,9 +322,16 @@ export default function UsersList({ setNotify }) {
           </MenuItem>
         </Menu>
       </Box>
-      <TableContainer component={Paper} sx={{ marginTop: 2, overflowX: 'auto', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)' }}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          marginTop: 2,
+          overflowX: "auto",
+          boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+        }}
+      >
         <Table ref={tableRef}>
-          <TableHead sx={{ backgroundColor: '#f0f0f0' }}>
+          <TableHead sx={{ backgroundColor: "#f0f0f0" }}>
             <TableRow>
               <TableCell></TableCell>
               <TableCell>Username</TableCell>
@@ -341,7 +366,7 @@ export default function UsersList({ setNotify }) {
                   <TableCell>{user.username}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    {user.status === 'Active' ? (
+                    {user.status === "Active" ? (
                       <Chip label={user.status} color="success" />
                     ) : (
                       <Chip label={user.status} color="error" />
@@ -350,10 +375,18 @@ export default function UsersList({ setNotify }) {
                   <TableCell>{user.role}</TableCell>
                   <TableCell>{user.mobile}</TableCell>
                   <TableCell>
-                    <IconButton onClick={()=>{handleUpdate(user._id)}}>
+                    <IconButton
+                      onClick={() => {
+                        handleUpdate(user._id);
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={()=>{handleDelete(user._id, user.username)}}>
+                    <IconButton
+                      onClick={() => {
+                        handleDelete(user._id, user.username);
+                      }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -368,15 +401,23 @@ export default function UsersList({ setNotify }) {
             </TableRow>
           </TableBody>
         </Table>
-          <div style={{ display: "none" }}>
-            <UsersTablePrint users={filteredUsers} ref={customTableRef} />
-          </div>
+        <div style={{ display: "none" }}>
+          <UsersTablePrint users={filteredUsers} ref={customTableRef} />
+        </div>
       </TableContainer>
 
       <NewUser openPopup={openPopup} setOpenPopup={setOpenPopup}></NewUser>
-      <UpdateUser openPopup2={openPopup2} setOpenPopup2={setOpenPopup2} userID = {fetchedUID}></UpdateUser>
-      <DeleteUser openPopup3={openPopup3} setOpenPopup3={setOpenPopup3} userID = {fetchedUID} username = {fetchedUname}></DeleteUser>
-
+      <UpdateUser
+        openPopup2={openPopup2}
+        setOpenPopup2={setOpenPopup2}
+        userID={fetchedUID}
+      ></UpdateUser>
+      <DeleteUser
+        openPopup3={openPopup3}
+        setOpenPopup3={setOpenPopup3}
+        userID={fetchedUID}
+        username={fetchedUname}
+      ></DeleteUser>
     </Box>
-  );  
+  );
 }

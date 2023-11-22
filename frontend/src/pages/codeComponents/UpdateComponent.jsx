@@ -12,10 +12,9 @@ import { useFormik } from "formik";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Notification from "../../components/Notification";
-import MonacoEditor from 'react-monaco-editor';
+import MonacoEditor from "react-monaco-editor";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 
 export default function UpdateComponent() {
   const [notify, setNotify] = useState({
@@ -27,10 +26,10 @@ export default function UpdateComponent() {
   const [categories, setCategories] = useState([]);
   const [IMGURL, setIMGURL] = useState("");
   const [componentData, setComponentData] = useState(null);
-  const componentId = useParams();// Get component ID from URL
+  const componentId = useParams(); // Get component ID from URL
   const navigate = useNavigate();
 
-  console.log(componentData)
+  console.log(componentData);
 
   useEffect(() => {
     const fetchComponentData = async () => {
@@ -43,14 +42,16 @@ export default function UpdateComponent() {
           setComponentData(response.data); // Set component data to state
           // Populate form fields with component data here
           // For example: formik.setValues({ componentName: response.data.componentName, ... });
-          formik.setValues({ 
+          formik.setValues({
             componentName: response.data.componentName || "",
             category: response.data.category || "",
             mainTechnology: response.data.mainTechnology || "",
             imageURL: componentData.imageURL || "",
             description: componentData.description || "",
             notes: componentData.notes || "",
-            codes: componentData.codes || [{ language: "", code: "", notes: "" }],
+            codes: componentData.codes || [
+              { language: "", code: "", notes: "" },
+            ],
           });
         }
       } catch (error) {
@@ -74,7 +75,7 @@ export default function UpdateComponent() {
   const handleCodeFieldChange = (value, index) => {
     const updatedCodes = [...formik.values.codes];
     updatedCodes[index].code = value;
-  
+
     formik.handleChange({
       target: {
         name: `codes[${index}].code`,
@@ -97,7 +98,7 @@ export default function UpdateComponent() {
       : {
           componentName: "",
           category: "",
-          mainTechnology:"",
+          mainTechnology: "",
           imageURL: "",
           description: "",
           notes: "",
@@ -109,7 +110,7 @@ export default function UpdateComponent() {
           `http://localhost:8070/Components/updateComponent/${componentId.id}`,
           values
         );
-  
+
         if (response.status === 200) {
           setNotify({
             isOpen: true,
@@ -128,7 +129,7 @@ export default function UpdateComponent() {
         console.error("Error updating component:", error);
       }
     },
-  });  
+  });
 
   const addCodeField = () => {
     formik.setValues({
@@ -168,7 +169,9 @@ export default function UpdateComponent() {
     // Display a confirmation dialog
     if (window.confirm("Are you sure you want to delete this component?")) {
       axios
-        .delete(`http://localhost:8070/Components/deleteComponent/${componentId.id}`)
+        .delete(
+          `http://localhost:8070/Components/deleteComponent/${componentId.id}`
+        )
         .then((response) => {
           if (response.status === 200) {
             sessionStorage.setItem("componentDeleted", "1");
@@ -240,7 +243,11 @@ export default function UpdateComponent() {
             <Typography variant="h6" style={{ marginTop: "20px" }}>
               Image Preview
             </Typography>
-            <img src={formik.values.imageURL} alt="&nbsp;&nbsp;invalid URL" style={{ maxWidth: "100%" }} />
+            <img
+              src={formik.values.imageURL}
+              alt="&nbsp;&nbsp;invalid URL"
+              style={{ maxWidth: "100%" }}
+            />
           </Box>
         )}
 
@@ -266,20 +273,22 @@ export default function UpdateComponent() {
           minRows={6}
         />
 
-        <Typography variant="h6" style={{ marginTop:"20px" }}>Code Inputs</Typography>
+        <Typography variant="h6" style={{ marginTop: "20px" }}>
+          Code Inputs
+        </Typography>
         <Divider sx={{ mt: 2, mb: 2.5 }} />
 
         {/* Codes Fields */}
         {formik.values.codes.map((codeField, index) => (
-          <Box 
-            key={index} 
-            display="flex" 
+          <Box
+            key={index}
+            display="flex"
             flexDirection="column"
             style={{
               boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-              padding:"20px",
-              marginTop:"20px",
-              marginBottom:"25px"
+              padding: "20px",
+              marginTop: "20px",
+              marginBottom: "25px",
             }}
           >
             <TextField
@@ -289,7 +298,7 @@ export default function UpdateComponent() {
               name={`codes[${index}].language`}
               value={codeField.language}
               onChange={formik.handleChange}
-              style={{ marginRight: '5px', width:"300px"}}
+              style={{ marginRight: "5px", width: "300px" }}
             >
               <MenuItem value="HTML">HTML</MenuItem>
               <MenuItem value="CSS">CSS</MenuItem>
@@ -308,7 +317,7 @@ export default function UpdateComponent() {
               language="javascript"
               theme="vs-dark"
               value={codeField.code}
-              options={{ 
+              options={{
                 selectOnLineNumbers: true,
                 automaticLayout: true,
                 padding: { top: 20, bottom: 20 },
@@ -332,7 +341,7 @@ export default function UpdateComponent() {
               onClick={() => removeCodeField(index)}
               size="small"
               color="error"
-              style={{ width:"35px", marginLeft: "auto"}}
+              style={{ width: "35px", marginLeft: "auto" }}
             >
               <DeleteIcon />
             </IconButton>
@@ -340,7 +349,12 @@ export default function UpdateComponent() {
         ))}
 
         {/* Add Code Field Button */}
-        <Button type="button" onClick={addCodeField} variant="outlined" style={{ marginRight: "10px"}}>
+        <Button
+          type="button"
+          onClick={addCodeField}
+          variant="outlined"
+          style={{ marginRight: "10px" }}
+        >
           Add Code Field
         </Button>
 
@@ -348,7 +362,13 @@ export default function UpdateComponent() {
         <Button type="submit" variant="contained" color="primary">
           Update
         </Button>
-        <Button type="button" onClick={handleDelete} style={{marginLeft:"10px"}} variant="outlined" color="error">
+        <Button
+          type="button"
+          onClick={handleDelete}
+          style={{ marginLeft: "10px" }}
+          variant="outlined"
+          color="error"
+        >
           Delete Component
         </Button>
       </form>

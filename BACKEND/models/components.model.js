@@ -21,21 +21,21 @@ const newComponent = new Schema(
       required: true,
     },
     imageURL: {
-        type: String,
+      type: String,
     },
     description: {
-        type: String,
+      type: String,
     },
     notes: {
-        type: String,
+      type: String,
     },
     codes: [
       {
         language: String,
         code: String,
         notes: String,
-      }
-    ]
+      },
+    ],
   },
   {
     timestamps: true,

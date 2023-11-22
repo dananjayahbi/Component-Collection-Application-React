@@ -2,15 +2,14 @@ const router = require("express").Router();
 const { protect } = require("../middleware/authorization");
 
 const {
-    registerUser,
-    login,
-    getUser,
-    getAllUsers,
-    getNewToken,
-    updateUser,
-    deleteUser,
+  registerUser,
+  login,
+  getUser,
+  getAllUsers,
+  getNewToken,
+  updateUser,
+  deleteUser,
 } = require("../controllers/usersController");
-
 
 //REGISTER USER
 router.post("/register", registerUser);
@@ -19,7 +18,7 @@ router.post("/register", registerUser);
 router.post("/login", login);
 
 //GET USER
-router.get("/getUser",protect, getUser);
+router.get("/getUser", protect, getUser);
 
 // GET ALL USERS
 router.get("/getAllUsers", getAllUsers);

@@ -12,9 +12,8 @@ import { useFormik } from "formik";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import Notification from "../../components/Notification";
-import MonacoEditor from 'react-monaco-editor';
+import MonacoEditor from "react-monaco-editor";
 import { useNavigate } from "react-router-dom";
-
 
 export default function NewComponent() {
   const [notify, setNotify] = useState({
@@ -163,7 +162,9 @@ export default function NewComponent() {
           onChange={formik.handleChange}
         >
           <MenuItem value="MERN">MERN</MenuItem>
-          <MenuItem value="HTML,CSS,JS,PHP,MYSQL">HTML,CSS,JS,PHP,MYSQL</MenuItem>
+          <MenuItem value="HTML,CSS,JS,PHP,MYSQL">
+            HTML,CSS,JS,PHP,MYSQL
+          </MenuItem>
         </TextField>
 
         <TextField
@@ -182,7 +183,11 @@ export default function NewComponent() {
             <Typography variant="h6" style={{ marginTop: "20px" }}>
               Image Preview
             </Typography>
-            <img src={IMGURL} alt="&nbsp;&nbsp;invalid URL" style={{ maxWidth: "100%" }} />
+            <img
+              src={IMGURL}
+              alt="&nbsp;&nbsp;invalid URL"
+              style={{ maxWidth: "100%" }}
+            />
           </Box>
         )}
 
@@ -208,20 +213,22 @@ export default function NewComponent() {
           minRows={6}
         />
 
-        <Typography variant="h6" style={{ marginTop:"20px" }}>Code Inputs</Typography>
+        <Typography variant="h6" style={{ marginTop: "20px" }}>
+          Code Inputs
+        </Typography>
         <Divider sx={{ mt: 2, mb: 2.5 }} />
 
         {/* Codes Fields */}
         {formik.values.codes.map((codeField, index) => (
-          <Box 
-            key={index} 
-            display="flex" 
+          <Box
+            key={index}
+            display="flex"
             flexDirection="column"
             style={{
               boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-              padding:"20px",
-              marginTop:"20px",
-              marginBottom:"25px"
+              padding: "20px",
+              marginTop: "20px",
+              marginBottom: "25px",
             }}
           >
             <TextField
@@ -231,7 +238,7 @@ export default function NewComponent() {
               name={`codes[${index}].language`}
               value={codeField.language}
               onChange={formik.handleChange}
-              style={{ marginRight: '5px', width:"300px"}}
+              style={{ marginRight: "5px", width: "300px" }}
             >
               <MenuItem value="HTML">HTML</MenuItem>
               <MenuItem value="CSS">CSS</MenuItem>
@@ -250,7 +257,7 @@ export default function NewComponent() {
               language="javascript"
               theme="vs-dark"
               value={codeField.code}
-              options={{ 
+              options={{
                 selectOnLineNumbers: true,
                 automaticLayout: true,
                 padding: { top: 20, bottom: 20 },
@@ -274,7 +281,7 @@ export default function NewComponent() {
               onClick={() => removeCodeField(index)}
               size="small"
               color="error"
-              style={{ width:"35px", marginLeft: "auto"}}
+              style={{ width: "35px", marginLeft: "auto" }}
             >
               <DeleteIcon />
             </IconButton>
@@ -282,7 +289,12 @@ export default function NewComponent() {
         ))}
 
         {/* Add Code Field Button */}
-        <Button type="button" onClick={addCodeField} variant="outlined" style={{ marginRight: "10px"}}>
+        <Button
+          type="button"
+          onClick={addCodeField}
+          variant="outlined"
+          style={{ marginRight: "10px" }}
+        >
           Add Code Field
         </Button>
 

@@ -37,7 +37,6 @@ export default function RolesList() {
   const [fetchedRole, setFetchedRole] = useState(null); //for delete functionality
   const tableRef = useRef(null);
 
-  
   //Fetch All Roles
   useEffect(() => {
     const fetchRoles = async () => {
@@ -62,27 +61,26 @@ export default function RolesList() {
   };
 
   useEffect(() => {
-    const filtered = roles.filter((Role) => 
-      (Role.role && Role.role.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filtered = roles.filter(
+      (Role) =>
+        Role.role && Role.role.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredRoles(filtered);
   }, [roles, searchTerm]);
 
-
   //Handle Update
-  function handleUpdate(RID){
+  function handleUpdate(RID) {
     setFetchedRID(RID);
     setOpenPopupUpdateRole(true);
   }
 
   //Handle Delete
-  function handleDelete(RID, Role){
+  function handleDelete(RID, Role) {
     setFetchedRole(Role);
     setFetchedRID(RID);
     setOpenPopupDeleteRole(true);
   }
 
-  
   return (
     <Box p={1}>
       <Box>
@@ -91,39 +89,53 @@ export default function RolesList() {
       </Box>
 
       <Box display="flex" justifyContent="flex-end" sx={{ mt: -3 }}>
-      <TextField
-        id="outlined-basic"
-        label="Search by Role"
-        variant="outlined"
-        value={searchTerm}
-        onChange={handleSearchTermChange}
-        fullWidth
-        margin="dense"
-        style={{ width: "30%", marginInlineEnd: "10px", marginTop: "-20px", paddingTop: "5px" }}
-        InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
-        inputProps={{
-          style: {
-            textAlign: "left",
-            padding: "10px",
-            fontSize: "14px", // Reduce font size of input text
-            lineHeight: "1.4", // Vertically center the text
-          },
-          type: "search", // Change the type attribute
-        }}
-      />
+        <TextField
+          id="outlined-basic"
+          label="Search by Role"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+          fullWidth
+          margin="dense"
+          style={{
+            width: "30%",
+            marginInlineEnd: "10px",
+            marginTop: "-20px",
+            paddingTop: "5px",
+          }}
+          InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
+          inputProps={{
+            style: {
+              textAlign: "left",
+              padding: "10px",
+              fontSize: "14px", // Reduce font size of input text
+              lineHeight: "1.4", // Vertically center the text
+            },
+            type: "search", // Change the type attribute
+          }}
+        />
 
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => {setOpenPopupAddRole(true)}}
+          onClick={() => {
+            setOpenPopupAddRole(true);
+          }}
           sx={{ mt: -2, height: "40px" }}
         >
           New Role
         </Button>
       </Box>
-      <TableContainer component={Paper} sx={{ marginTop: 2, overflowX: 'auto', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)' }}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          marginTop: 2,
+          overflowX: "auto",
+          boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+        }}
+      >
         <Table ref={tableRef}>
-          <TableHead sx={{ backgroundColor: '#f0f0f0' }}>
+          <TableHead sx={{ backgroundColor: "#f0f0f0" }}>
             <TableRow>
               <TableCell>Role</TableCell>
               <TableCell>Description</TableCell>
@@ -150,17 +162,25 @@ export default function RolesList() {
                   <TableCell>{Role.role}</TableCell>
                   <TableCell>{Role.description}</TableCell>
                   <TableCell>
-                    {Role.status === 'Active' ? (
+                    {Role.status === "Active" ? (
                       <Chip label={Role.status} color="success" />
                     ) : (
                       <Chip label={Role.status} color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={()=>{handleUpdate(Role._id)}}>
+                    <IconButton
+                      onClick={() => {
+                        handleUpdate(Role._id);
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={()=>{handleDelete(Role._id, Role.role)}}>
+                    <IconButton
+                      onClick={() => {
+                        handleDelete(Role._id, Role.role);
+                      }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -177,10 +197,21 @@ export default function RolesList() {
         </Table>
       </TableContainer>
 
-      <AddRole openPopupAddRole={openPopupAddRole} setOpenPopupAddRole={setOpenPopupAddRole}></AddRole>
-      <UpdateRole openPopupUpdateRole={openPopupUpdateRole} setOpenPopupUpdateRole={setOpenPopupUpdateRole} roleID = {fetchedRID}></UpdateRole>
-      <DeleteRole openPopupDeleteRole={openPopupDeleteRole} setOpenPopupDeleteRole={setOpenPopupDeleteRole} roleID = {fetchedRID} role = {fetchedRole}></DeleteRole>
-
+      <AddRole
+        openPopupAddRole={openPopupAddRole}
+        setOpenPopupAddRole={setOpenPopupAddRole}
+      ></AddRole>
+      <UpdateRole
+        openPopupUpdateRole={openPopupUpdateRole}
+        setOpenPopupUpdateRole={setOpenPopupUpdateRole}
+        roleID={fetchedRID}
+      ></UpdateRole>
+      <DeleteRole
+        openPopupDeleteRole={openPopupDeleteRole}
+        setOpenPopupDeleteRole={setOpenPopupDeleteRole}
+        roleID={fetchedRID}
+        role={fetchedRole}
+      ></DeleteRole>
     </Box>
-  );  
+  );
 }

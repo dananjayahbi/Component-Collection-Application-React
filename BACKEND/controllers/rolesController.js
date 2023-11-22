@@ -6,10 +6,7 @@ const addRole = async (req, res) => {
     const { role, description, permissions, status } = req.body;
 
     // Transform permissions array from frontend data
-    const pageNames = [
-      "All Admin Permissions", 
-      "All User Permissions"
-    ]; // Replace with actual page names
+    const pageNames = ["All Admin Permissions", "All User Permissions"]; // Replace with actual page names
     const transformedPermissions = pageNames.map((pageName) => ({
       page: pageName,
       access: permissions.includes(pageName),
@@ -66,45 +63,33 @@ const getRole = async (req, res) => {
     const roleObject = await Roles.findById(req.params.id);
 
     if (!roleObject) {
-      return res.status(404).json({ error: 'Role not found' });
+      return res.status(404).json({ error: "Role not found" });
     }
 
-    const {
-      _id,
-      role,
-      description,
-      permissions,
-      status
-    } = roleObject;
+    const { _id, role, description, permissions, status } = roleObject;
 
     res.status(200).json({
       _id,
       role,
       description,
       permissions,
-      status
+      status,
     });
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 //Update Role
 const updateRole = async (req, res) => {
   try {
-    const { 
-      role,
-      description,
-      permissions,
-      status
-    } = req.body;
+    const { role, description, permissions, status } = req.body;
 
     let updateData = {
       role,
       description,
       permissions,
-      status
+      status,
     };
 
     // Updating
@@ -112,19 +97,18 @@ const updateRole = async (req, res) => {
 
     if (update) {
       res.status(200).json({
-        data: 'Role updated successfully',
+        data: "Role updated successfully",
         status: true,
       });
     } else {
       res.status(401).json({
-        errorMessage: 'Failed to edit the Role!',
+        errorMessage: "Failed to edit the Role!",
         status: false,
       });
     }
-    
   } catch (error) {
     res.status(401).json({
-      errorMessage: 'Something went wrong!\n' + error,
+      errorMessage: "Something went wrong!\n" + error,
       status: false,
     });
   }
@@ -154,11 +138,10 @@ const deleteRole = async (req, res) => {
   }
 };
 
-
 module.exports = {
   addRole,
   getAllRoles,
   updateRole,
   deleteRole,
-  getRole
+  getRole,
 };

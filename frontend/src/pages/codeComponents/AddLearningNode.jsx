@@ -193,21 +193,21 @@ export default function AddLearningNode() {
                     </IconButton>
                   </Grid>
                   {imageURL.imgURL && (
-                        <>
-                            <br />
-                            <img
-                                src={imageURL.imgURL}
-                                alt="&nbsp;Invalid URL"
-                                style={{
-                                marginTop: "5px",
-                                marginLeft: "15px",
-                                height: "auto",
-                                width: "auto",
-                                maxWidth: "500px",
-                                }}
-                            />
-                        </>
-                    )}
+                    <>
+                      <br />
+                      <img
+                        src={imageURL.imgURL}
+                        alt="&nbsp;Invalid URL"
+                        style={{
+                          marginTop: "5px",
+                          marginLeft: "15px",
+                          height: "auto",
+                          width: "auto",
+                          maxWidth: "500px",
+                        }}
+                      />
+                    </>
+                  )}
                 </Grid>
               ))}
               <Grid item xs={12}>

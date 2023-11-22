@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from '../partials/Sidebar';
-import Header from '../partials/Header';
-import {
-  Routes,
-  Route,
-  Navigate
-} from "react-router-dom";
-import Home from '../pages/Home';
-import ManageFProjects from './codeComponents/NewComponent'
-import UsersList from './Users/UsersList';
-import RolesList from './Users/RolesList';
-import SiteSettings from './Settings/SiteSettings';
-import DatabaseBackup from './Settings/DatabaseBackup';
-import Categories from './codeComponents/Categories';
-import UpdateComponent from './codeComponents/UpdateComponent';
-import Notification from '../components/Notification';
-import LearnNodes from './codeComponents/LearnNodes';
-import AddLearningNode from './codeComponents/AddLearningNode';
+import React, { useState, useEffect } from "react";
+import Sidebar from "../partials/Sidebar";
+import Header from "../partials/Header";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "../pages/Home";
+import ManageFProjects from "./codeComponents/NewComponent";
+import UsersList from "./Users/UsersList";
+import RolesList from "./Users/RolesList";
+import SiteSettings from "./Settings/SiteSettings";
+import DatabaseBackup from "./Settings/DatabaseBackup";
+import Categories from "./codeComponents/Categories";
+import UpdateComponent from "./codeComponents/UpdateComponent";
+import Notification from "../components/Notification";
+import LearnNodes from "./codeComponents/LearnNodes";
+import AddLearningNode from "./codeComponents/AddLearningNode";
 import axios from "axios";
 
 function Dashboard() {
-
   const [notify, setNotify] = useState({
     isOpen: false,
-    message: '',
-    type: '',
+    message: "",
+    type: "",
   });
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -54,7 +49,7 @@ function Dashboard() {
 
   useEffect(() => {
     getUserDetails(token);
-  },[])
+  }, []);
 
   if (isLogged == "false") {
     // If not logged in, redirect to login page
@@ -235,18 +230,17 @@ function Dashboard() {
     }
   });
 
-
   //Getting Loggen In user's details
-  async function getUserDetails(token){
+  async function getUserDetails(token) {
     await axios
-        .get(`http://localhost:8070/users/getUser`,{
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-        .then((res) =>{
-            setLoggedInUserDetails(res.data);
-        })
+      .get(`http://localhost:8070/users/getUser`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setLoggedInUserDetails(res.data);
+      });
   }
 
   return (
@@ -265,19 +259,30 @@ function Dashboard() {
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* Cards */}
-            <div> {/* <div className="grid grid-cols-12 gap-6"> */}
+            <div>
+              {" "}
+              {/* <div className="grid grid-cols-12 gap-6"> */}
               {/* Define routes and load corresponding components */}
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/NewComponent" element={<ManageFProjects />} />
-                <Route path="/UpdateComponent/:id" element={<UpdateComponent />} />
+                <Route
+                  path="/UpdateComponent/:id"
+                  element={<UpdateComponent />}
+                />
                 <Route path="/learningNodes" element={<LearnNodes />} />
                 <Route path="/addLearningNode" element={<AddLearningNode />} />
                 <Route path="/CMCategories" element={<Categories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
-                <Route path="/settings/siteSettings" element={<SiteSettings />} />
-                <Route path="/settings/databaseBackup" element={<DatabaseBackup />} />
+                <Route
+                  path="/settings/siteSettings"
+                  element={<SiteSettings />}
+                />
+                <Route
+                  path="/settings/databaseBackup"
+                  element={<DatabaseBackup />}
+                />
               </Routes>
             </div>
           </div>

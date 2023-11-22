@@ -1,12 +1,12 @@
 const router = require("express").Router();
 
 const {
-    addLearningNode,
-    getAllLearningNode,
-    getLearningNode,
-    updateLearningNode,
-    deleteLearningNode,
-} = require("../controllers/learningNodesController")
+  addLearningNode,
+  getAllLearningNode,
+  getLearningNode,
+  updateLearningNode,
+  deleteLearningNode,
+} = require("../controllers/learningNodesController");
 
 //ADD NEW OTHERCODE
 router.post("/addLearningNode", addLearningNode);
@@ -22,6 +22,5 @@ router.put("/updateLearningNode/:id", updateLearningNode);
 
 //DELETE OTHERCODE
 router.delete("/deleteLearningNode/:id", deleteLearningNode);
-
 
 module.exports = router;

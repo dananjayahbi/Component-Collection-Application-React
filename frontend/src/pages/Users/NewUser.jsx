@@ -16,14 +16,13 @@ import {
   IconButton,
 } from "@mui/material";
 import axios from "axios";
-import CustomTextField from "../../components/CustomTextField"
+import CustomTextField from "../../components/CustomTextField";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -69,16 +68,15 @@ export default function NewUser(props) {
   const [roles, setRoles] = useState([]);
   const status = ["Active", "Inactive"];
 
-
   useEffect(() => {
     async function fetchRoles() {
       try {
-        const response = await fetch('http://localhost:8070/roles/getAllRoles');
+        const response = await fetch("http://localhost:8070/roles/getAllRoles");
         const data = await response.json();
-        const roleNames = data.map(role => role.role);
+        const roleNames = data.map((role) => role.role);
         setRoles(roleNames);
       } catch (error) {
-        console.error('Error fetching roles:', error);
+        console.error("Error fetching roles:", error);
       }
     }
 
@@ -89,7 +87,7 @@ export default function NewUser(props) {
     try {
       await axios.post(apiUrl, values);
       sessionStorage.setItem("userCreated", "1");
-      navigate("/users/usersList")
+      navigate("/users/usersList");
     } catch (error) {
       setNotify({
         isOpen: true,
@@ -109,16 +107,21 @@ export default function NewUser(props) {
       maxWidth="md"
       TransitionComponent={Transition}
       PaperProps={{
-          style: { borderRadius: 10, width: "80%", padding: "20px", paddingBottom: "30px"},
+        style: {
+          borderRadius: 10,
+          width: "80%",
+          padding: "20px",
+          paddingBottom: "30px",
+        },
       }}
     >
       <div className="popup">
         <DialogTitle>
-        <div className="d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
-            <p className="popupTitle">Add User</p>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center">
+              <p className="popupTitle">Add User</p>
+            </div>
           </div>
-        </div>
 
           {/* NOTIFICATION */}
           <Notification notify={notify} setNotify={setNotify} />
@@ -134,121 +137,137 @@ export default function NewUser(props) {
 
         <DialogContent>
           <Formik
-            initialValues={{INITIAL_FORM_STATE}}
+            initialValues={{ INITIAL_FORM_STATE }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
-            <Form>
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="username" label="Username" />
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px" }}>
-                <CustomTextField name="mobile" label="Mobile" />
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px" }}>
-                <CustomTextField name="email" label="Email" />
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px" }}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel htmlFor="role">Role</InputLabel>
-                  <Field
-                    as={Select}
-                    name="role"
-                    label="Role"
-                    inputProps={{ id: "role" }}
-                  >
-                    {roles.map((role) => (
-                      <MenuItem key={role} value={role}>
-                        {role}
-                      </MenuItem>
-                    ))}
-                  </Field>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px" }}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel htmlFor="status">Status</InputLabel>
-                  <Field
-                    as={Select}
-                    name="status"
-                    label="Status"
-                    inputProps={{ id: "status" }}
-                  >
-                    {status.map((stat) => (
-                      <MenuItem key={stat} value={stat}>
-                        {stat}
-                      </MenuItem>
-                    ))}
-                  </Field>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "10px" }}>
-                <CustomTextField
-                  name="password"
-                  label="Password"
-                  type={showPassword ? "text" : "password"}
-                  InputProps={{
-                    endAdornment: (
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() => setShowPassword(!showPassword)}
-                        edge="end"
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    ),
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12} style={{ marginBottom: "30px" }}>
-                <CustomTextField
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  type={showConfirmPassword ? "text" : "password"}
-                  InputProps={{
-                    endAdornment: (
-                      <IconButton
-                        aria-label="toggle confirm password visibility"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        edge="end"
-                      >
-                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    ),
-                  }}
-                />
-              </Grid>
-
-              <div style={{ display: "flex", justifyContent: "right", marginTop: "1rem" }}>
-                <Button
-                  startIcon={<ClearIcon />}
-                  style={{marginRight: "15px"}}
-                  onClick={() => {
-                    setOpenPopup(false);
-                  }}
-                  variant="outlined"
-                  color="primary"
+              <Form>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginBottom: "10px", marginTop: "10px" }}
                 >
-                  Close
-                </Button>
-                <Button 
-                  type="submit" 
-                  variant="contained"
-                  color="primary"
-                  disabled={isSubmitting}
-                  startIcon={<AddIcon />}
+                  <CustomTextField name="username" label="Username" />
+                </Grid>
+
+                <Grid item xs={12} style={{ marginBottom: "10px" }}>
+                  <CustomTextField name="mobile" label="Mobile" />
+                </Grid>
+
+                <Grid item xs={12} style={{ marginBottom: "10px" }}>
+                  <CustomTextField name="email" label="Email" />
+                </Grid>
+
+                <Grid item xs={12} style={{ marginBottom: "10px" }}>
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel htmlFor="role">Role</InputLabel>
+                    <Field
+                      as={Select}
+                      name="role"
+                      label="Role"
+                      inputProps={{ id: "role" }}
+                    >
+                      {roles.map((role) => (
+                        <MenuItem key={role} value={role}>
+                          {role}
+                        </MenuItem>
+                      ))}
+                    </Field>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} style={{ marginBottom: "10px" }}>
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel htmlFor="status">Status</InputLabel>
+                    <Field
+                      as={Select}
+                      name="status"
+                      label="Status"
+                      inputProps={{ id: "status" }}
+                    >
+                      {status.map((stat) => (
+                        <MenuItem key={stat} value={stat}>
+                          {stat}
+                        </MenuItem>
+                      ))}
+                    </Field>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} style={{ marginBottom: "10px" }}>
+                  <CustomTextField
+                    name="password"
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() => setShowPassword(!showPassword)}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      ),
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12} style={{ marginBottom: "30px" }}>
+                  <CustomTextField
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type={showConfirmPassword ? "text" : "password"}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          aria-label="toggle confirm password visibility"
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                          edge="end"
+                        >
+                          {showConfirmPassword ? (
+                            <Visibility />
+                          ) : (
+                            <VisibilityOff />
+                          )}
+                        </IconButton>
+                      ),
+                    }}
+                  />
+                </Grid>
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "right",
+                    marginTop: "1rem",
+                  }}
                 >
-                  Add
-                </Button>
-              </div>
-            </Form>
+                  <Button
+                    startIcon={<ClearIcon />}
+                    style={{ marginRight: "15px" }}
+                    onClick={() => {
+                      setOpenPopup(false);
+                    }}
+                    variant="outlined"
+                    color="primary"
+                  >
+                    Close
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={isSubmitting}
+                    startIcon={<AddIcon />}
+                  >
+                    Add
+                  </Button>
+                </div>
+              </Form>
             )}
           </Formik>
         </DialogContent>

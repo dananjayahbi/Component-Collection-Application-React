@@ -35,7 +35,9 @@ export default function Home() {
 
   const handleSubmit = (values) => {
     // Filter components by category
-    const filtered = components.filter((component) => component.category === values.category);
+    const filtered = components.filter(
+      (component) => component.category === values.category
+    );
 
     setFilteredComponents(filtered);
   };
@@ -46,17 +48,31 @@ export default function Home() {
       <Divider sx={{ mt: 2, mb: 2.5 }} />
 
       <Formik initialValues={{ category: "" }} onSubmit={handleSubmit}>
-        <Form style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+        <Form
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
           <Grid container spacing={2} style={{ width: "500px" }}>
             <Grid item xs={12}>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel id="category-label">Select Category</InputLabel>
-                <Field as={Select} labelId="category-label" label="Select Category" name="category">
+                <Field
+                  as={Select}
+                  labelId="category-label"
+                  label="Select Category"
+                  name="category"
+                >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
                   {categories.map((category) => (
-                    <MenuItem key={category.categoryName} value={category.categoryName}>
+                    <MenuItem
+                      key={category.categoryName}
+                      value={category.categoryName}
+                    >
                       {category.categoryName}
                     </MenuItem>
                   ))}
@@ -64,7 +80,12 @@ export default function Home() {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 Find
               </Button>
             </Grid>
@@ -76,14 +97,22 @@ export default function Home() {
         {filteredComponents.map((component) => (
           <Grid item key={component.id} xs={12} sm={6}>
             <Card sx={{ maxWidth: 645 }}>
-              <CardMedia component="img" height="140" image={component.imageURL} alt={component.componentName} />
+              <CardMedia
+                component="img"
+                height="140"
+                image={component.imageURL}
+                alt={component.componentName}
+              />
               <CardContent>
                 <Typography variant="h6" component="div">
                   {component.componentName}
                 </Typography>
               </CardContent>
               <CardActions>
-                <a href={`/updateComponent/${component._id}`} style={{ textDecoration: "none" }}>
+                <a
+                  href={`/updateComponent/${component._id}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <Button size="small" color="primary">
                     View or Update
                   </Button>

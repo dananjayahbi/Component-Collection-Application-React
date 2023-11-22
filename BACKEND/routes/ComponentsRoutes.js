@@ -1,12 +1,12 @@
 const router = require("express").Router();
 
 const {
-    addComponent,
-    getAllComponents,
-    getComponent,
-    updateComponent,
-    deleteComponent
-} = require("../controllers/componentsController")
+  addComponent,
+  getAllComponents,
+  getComponent,
+  updateComponent,
+  deleteComponent,
+} = require("../controllers/componentsController");
 
 //ADD NEW PROJECT
 router.post("/addComponent", addComponent);
@@ -22,6 +22,5 @@ router.put("/updateComponent/:id", updateComponent);
 
 //DELETE PROJECT
 router.delete("/deleteComponent/:id", deleteComponent);
-
 
 module.exports = router;

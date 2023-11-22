@@ -11,8 +11,8 @@ import axios from "axios";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import ConnectedTvIcon from "@mui/icons-material/ConnectedTv";
-import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import AirlineStopsIcon from "@mui/icons-material/AirlineStops";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
