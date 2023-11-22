@@ -226,6 +226,15 @@ function Dashboard() {
       });
       sessionStorage.removeItem("NodeAdded");
     }
+
+    if (sessionStorage.getItem("NodeUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Node Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("NodeUpdated");
+    }
   });
 
 

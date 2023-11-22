@@ -13,36 +13,36 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-// import ViewAndUpdateOtherCode from "./ViewAndUpdateOtherCode";
+import ViewAndUpdateLearningNode from "./ViewAndUpdateLearningNode";
 // import DeleteOtherCode from "./DeleteOtherCode";
 
 export default function LearnNodes() {
-  const [otherCodes, setOtherCodes] = useState([]);
+  const [learningNodes, setLearningNodes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const [openPopupVNU, setOpenPopupVNU] = useState(false);
+  const [openPopupVNULNode, setOpenPopupVNULNode] = useState(false);
   const [openPopupDeleteOtherCode, setOpenPopupDeleteOtherCode] = useState(false);
-  const [FetchedOtherCode, setFetchedOtherCode] = useState(null);
+  const [FetchedLearningNode, setFetchedLearningNode] = useState(null);
 
   useEffect(() => {
     // Fetch data from the backend API
-    fetch("http://localhost:8070/otherCodes/getAllOtherCodes")
+    fetch("http://localhost:8070/learningNodes/getAllLearningNode")
       .then((response) => response.json())
-      .then((data) => setOtherCodes(data))
+      .then((data) => setLearningNodes(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  const handleAddNote = () => {
+  const handleAddNode = () => {
     navigate("/addLearningNode");
   };
 
   const handleViewEdit = (data) => {
-    setFetchedOtherCode(data);
-    setOpenPopupVNU(true);
+    setFetchedLearningNode(data);
+    setOpenPopupVNULNode(true);
   };
 
   const handleDelete = (data) => {
-    setFetchedOtherCode(data);
+    setFetchedLearningNode(data);
     setOpenPopupDeleteOtherCode(true);
   };
 
@@ -56,7 +56,7 @@ export default function LearnNodes() {
         {/* Add Note Button */}
         <Button
           type="button"
-          onClick={handleAddNote}
+          onClick={handleAddNode}
           variant="contained"
           style={{
             marginRight: "10px",
@@ -88,22 +88,22 @@ export default function LearnNodes() {
         />
       </Box>
 
-      {/* Display OtherCodes as Cards */}
+      {/* Display LearningNodes as Cards */}
       <Grid container spacing={2}>
-        {otherCodes
-          .filter((code) =>
-            code.title.toLowerCase().includes(searchTerm.toLowerCase())
+        {learningNodes
+          .filter((node) =>
+            node.title?.toLowerCase().includes(searchTerm.toLowerCase())
           )
-          .map((code) => (
-            <Grid item key={code.OTID} xs={12} sm={6} md={4}>
+          .map((node) => (
+            <Grid item key={node.OTID} xs={12} sm={6} md={4}>
               <Card style={{ backgroundColor: "#E0E8FC" }}>
                 <CardContent>
-                  <Typography variant="h6">{code.title}</Typography> <br />
+                  <Typography variant="h6">{node.title}</Typography> <br />
                   {/* Add other details as needed */}
                   <Button
                     variant="outlined"
                     color="primary"
-                    onClick={() => handleViewEdit(code)}
+                    onClick={() => handleViewEdit(node)}
                     style={{ marginRight: "5px" }}
                   >
                     View & Edit
@@ -111,7 +111,7 @@ export default function LearnNodes() {
                   <Button
                     variant="outlined"
                     color="secondary"
-                    onClick={() => handleDelete(code)}
+                    onClick={() => handleDelete(node)}
                   >
                     Delete
                   </Button>
@@ -121,12 +121,12 @@ export default function LearnNodes() {
           ))}
       </Grid>
 
-      {/* <ViewAndUpdateOtherCode
-        openPopupVNU={openPopupVNU}
-        setOpenPopupVNU={setOpenPopupVNU}
-        otherCodeData={FetchedOtherCode}
-      ></ViewAndUpdateOtherCode>
-      <DeleteOtherCode
+      <ViewAndUpdateLearningNode
+        openPopupVNULNode={openPopupVNULNode}
+        setOpenPopupVNULNode={setOpenPopupVNULNode}
+        learningNodeData={FetchedLearningNode}
+      ></ViewAndUpdateLearningNode>
+      {/* <DeleteOtherCode
         openPopupDeleteOtherCode={openPopupDeleteOtherCode}
         setOpenPopupDeleteOtherCode={setOpenPopupDeleteOtherCode}
         otherCodeData={FetchedOtherCode}

@@ -69,18 +69,6 @@ export default function AddLearningNode() {
     formik.setFieldValue("sections", updatedSections);
   };
 
-  const handleImageURLChange = (sectionIndex, imageURLIndex, event) => {
-    const { value } = event.target;
-    const updatedImageURLs = [
-      ...formik.values.sections[sectionIndex].imageURLs,
-    ];
-    updatedImageURLs[imageURLIndex].imgURL = value;
-    formik.setFieldValue(
-      `sections[${sectionIndex}].imageURLs`,
-      updatedImageURLs
-    );
-  };
-
   const handleAddImageURL = (sectionIndex) => {
     formik.setFieldValue(`sections[${sectionIndex}].imageURLs`, [
       ...formik.values.sections[sectionIndex].imageURLs,
