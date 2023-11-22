@@ -26,6 +26,10 @@ export default function NewComponent() {
   const [IMGURL, setIMGURL] = useState("");
   const navigate = useNavigate();
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   const handleChange = (event) => {
     formik.handleChange(event);
     setIMGURL(event.target.value);
@@ -120,6 +124,15 @@ export default function NewComponent() {
       <Notification notify={notify} setNotify={setNotify} />
       <form onSubmit={formik.handleSubmit}>
         <Box>
+          {/* Back to the otherCode Button */}
+          <Button
+            type="button"
+            onClick={handleBack}
+            variant="contained"
+            style={{ marginRight: "10px" }}
+          >
+            Back
+          </Button> <br /><br />
           <Typography variant="h5">Add Component</Typography>
           <Divider sx={{ mt: 2, mb: 2.5 }} />
         </Box>

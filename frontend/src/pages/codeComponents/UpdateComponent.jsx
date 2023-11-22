@@ -29,7 +29,9 @@ export default function UpdateComponent() {
   const componentId = useParams(); // Get component ID from URL
   const navigate = useNavigate();
 
-  console.log(componentData);
+  const handleBack = () => {
+    navigate("/");
+  };
 
   useEffect(() => {
     const fetchComponentData = async () => {
@@ -117,7 +119,7 @@ export default function UpdateComponent() {
             message: "Component Updated Successfully!",
             type: "success",
           });
-          // Reset the form here if needed
+          window.location.reload();
         } else {
           setNotify({
             isOpen: true,
@@ -196,6 +198,15 @@ export default function UpdateComponent() {
       <Notification notify={notify} setNotify={setNotify} />
       <form onSubmit={formik.handleSubmit}>
         <Box>
+          {/* Back to the otherCode Button */}
+          <Button
+            type="button"
+            onClick={handleBack}
+            variant="contained"
+            style={{ marginRight: "10px" }}
+          >
+            Back
+          </Button> <br /><br />
           <Typography variant="h5">View, Update or Delete Component</Typography>
           <Divider sx={{ mt: 2, mb: 2.5 }} />
         </Box>
@@ -225,6 +236,22 @@ export default function UpdateComponent() {
               {category}
             </MenuItem>
           ))}
+        </TextField>
+
+        {/* Main Technology Dropdown */}
+        <TextField
+          select
+          label="Main Technology"
+          fullWidth
+          margin="normal"
+          name="mainTechnology"
+          value={formik.values.mainTechnology}
+          onChange={formik.handleChange}
+        >
+          <MenuItem value="MERN">MERN</MenuItem>
+          <MenuItem value="HTML,CSS,JS,PHP,MYSQL">
+            HTML,CSS,JS,PHP,MYSQL
+          </MenuItem>
         </TextField>
 
         <TextField

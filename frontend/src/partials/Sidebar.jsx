@@ -10,7 +10,6 @@ import SidebarLinkGroup from "./SidebarLinkGroup";
 import axios from "axios";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import ConstructionIcon from "@mui/icons-material/Construction";
-import ConnectedTvIcon from "@mui/icons-material/ConnectedTv";
 import AirlineStopsIcon from "@mui/icons-material/AirlineStops";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 
@@ -28,7 +27,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const token = window.localStorage.getItem("token");
   const [loggedInUserDetails, setLoggedInUserDetails] = useState("");
-  const [hasAccess, setHasAccess] = useState(false);
   const [pagePermissions, setPagePermissions] = useState([]);
 
   // close on click outside
