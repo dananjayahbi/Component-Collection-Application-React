@@ -14,7 +14,6 @@ const newOtherCode = new Schema(
     },
     note: {
       type: String,
-      required: true,
     },
     imageURLs: [
       {

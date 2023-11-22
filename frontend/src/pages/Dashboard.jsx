@@ -17,6 +17,7 @@ import DatabaseBackup from './Settings/DatabaseBackup';
 import Categories from './codeComponents/Categories';
 import UpdateComponent from './codeComponents/UpdateComponent';
 import Notification from '../components/Notification';
+import LearnNodes from './codeComponents/LearnNodes';
 import axios from "axios";
 
 function Dashboard() {
@@ -197,6 +198,24 @@ function Dashboard() {
       });
       sessionStorage.removeItem("NoteAdded");
     }
+
+    if (sessionStorage.getItem("NoteUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Note Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("NoteUpdated");
+    }
+
+    if (sessionStorage.getItem("NoteDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Note Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("NoteDeleted");
+    }
   });
 
 
@@ -237,6 +256,7 @@ function Dashboard() {
                 <Route path="/UpdateComponent/:id" element={<UpdateComponent />} />
                 <Route path="/otherCodes" element={<OtherCodes />} />
                 <Route path="/AddOtherCode" element={<AddOtherCode />} />
+                <Route path="/learningNodes" element={<LearnNodes />} />
                 <Route path="/CMCategories" element={<Categories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />

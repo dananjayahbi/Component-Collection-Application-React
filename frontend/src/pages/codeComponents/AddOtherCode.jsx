@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Typography,
-  Divider,
   TextField,
   Button,
   IconButton,
@@ -56,7 +55,7 @@ function AddOtherCode() {
 
         if (response.status === 200) {
           sessionStorage.setItem("NoteAdded", "1");
-          window.location.reload();
+          navigate("/othercodes");
         } else {
           setNotify({
             isOpen: true,
@@ -116,7 +115,7 @@ function AddOtherCode() {
         variant="contained"
         style={{ marginRight: "10px" }}
       >
-        Back to Notes
+        Back
       </Button> <br /> <br />
 
       {/* Form */}

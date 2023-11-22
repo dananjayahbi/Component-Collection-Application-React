@@ -2,29 +2,28 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
-  Divider,
   TextField,
   Button,
   IconButton,
-  MenuItem,
+  Divider,
   Card,
   CardContent,
   Grid,
   InputAdornment,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Notification from "../../components/Notification";
 import SearchIcon from "@mui/icons-material/Search";
+import ViewAndUpdateOtherCode from "./ViewAndUpdateOtherCode";
+import DeleteOtherCode from "./DeleteOtherCode";
 
 export default function OtherCodes() {
-  const [notify, setNotify] = useState({
-    isOpen: false,
-    message: "",
-    type: "",
-  });
   const [otherCodes, setOtherCodes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const [openPopupVNU, setOpenPopupVNU] = useState(false);
+  const [openPopupDeleteOtherCode, setOpenPopupDeleteOtherCode] =
+    useState(false);
+  const [FetchedOtherCode, setFetchedOtherCode] = useState(null);
 
   useEffect(() => {
     // Fetch data from the backend API
@@ -38,48 +37,57 @@ export default function OtherCodes() {
     navigate("/AddOtherCode");
   };
 
-  const handleViewEdit = (otid) => {
-    // Implement the logic for viewing/editing a specific OtherCode
-    console.log(`View/Edit ${otid}`);
+  const handleViewEdit = (data) => {
+    setFetchedOtherCode(data);
+    setOpenPopupVNU(true);
   };
 
-  const handleDelete = (otid) => {
-    // Implement the logic for deleting a specific OtherCode
-    console.log(`Delete ${otid}`);
+  const handleDelete = (data) => {
+    setFetchedOtherCode(data);
+    setOpenPopupDeleteOtherCode(true);
   };
 
   return (
     <>
-    <Box style={{ display: "flex", alignItems:"center", marginBottom: "50px" }}>
-      {/* Add Note Button */}
-      <Button
-        type="button"
-        onClick={handleAddNote}
-        variant="contained"
-        style={{ marginRight: "10px", width: "150px", height: "55px", marginTop: "5px" }}
+      <Typography variant="h5" style={{ marginBottom: "20px" }}>Other Codes</Typography>
+      <Divider style={{ marginBottom: "20px" }} />
+      <Box
+        style={{ display: "flex", alignItems: "center", marginBottom: "50px" }}
       >
-        Add Note
-      </Button>
+        {/* Add Note Button */}
+        <Button
+          type="button"
+          onClick={handleAddNote}
+          variant="contained"
+          style={{
+            marginRight: "10px",
+            width: "150px",
+            height: "55px",
+            marginTop: "5px",
+          }}
+        >
+          Add Note
+        </Button>
 
-      {/* Search Bar */}
-      <TextField
-        label="Search by Title"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-    </Box>
+        {/* Search Bar */}
+        <TextField
+          label="Search by Title"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
 
       {/* Display OtherCodes as Cards */}
       <Grid container spacing={2}>
@@ -89,14 +97,14 @@ export default function OtherCodes() {
           )
           .map((code) => (
             <Grid item key={code.OTID} xs={12} sm={6} md={4}>
-              <Card style={{ backgroundColor: "#E6F7FF" }}>
+              <Card style={{ backgroundColor: "#E0E8FC" }}>
                 <CardContent>
-                  <Typography variant="h6">{code.title}</Typography>
+                  <Typography variant="h6">{code.title}</Typography> <br />
                   {/* Add other details as needed */}
                   <Button
                     variant="outlined"
                     color="primary"
-                    onClick={() => handleViewEdit(code.OTID)}
+                    onClick={() => handleViewEdit(code)}
                     style={{ marginRight: "5px" }}
                   >
                     View & Edit
@@ -104,7 +112,7 @@ export default function OtherCodes() {
                   <Button
                     variant="outlined"
                     color="secondary"
-                    onClick={() => handleDelete(code.OTID)}
+                    onClick={() => handleDelete(code)}
                   >
                     Delete
                   </Button>
@@ -113,6 +121,17 @@ export default function OtherCodes() {
             </Grid>
           ))}
       </Grid>
+
+      <ViewAndUpdateOtherCode
+        openPopupVNU={openPopupVNU}
+        setOpenPopupVNU={setOpenPopupVNU}
+        otherCodeData={FetchedOtherCode}
+      ></ViewAndUpdateOtherCode>
+      <DeleteOtherCode
+        openPopupDeleteOtherCode={openPopupDeleteOtherCode}
+        setOpenPopupDeleteOtherCode={setOpenPopupDeleteOtherCode}
+        otherCodeData={FetchedOtherCode}
+      ></DeleteOtherCode>
     </>
   );
 }
