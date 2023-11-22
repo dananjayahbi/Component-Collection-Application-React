@@ -16,35 +16,35 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 //The Main function
-export default function DeleteOtherCode(props) {
+export default function DeleteLearningNode(props) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
-  const fetchedOtherCodeData = props.otherCodeData;
-  const { openPopupDeleteOtherCode, setOpenPopupDeleteOtherCode } = props;
+  const fetchedLearningNode = props.learningNodeData;
+  const { openPopupDeleteLearningNode, setOpenPopupDeleteLearningNode } = props;
 
-  console.log(fetchedOtherCodeData);
+  console.log(props);
 
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:8070/otherCodes/deleteOtherCode/${fetchedOtherCodeData._id}`
+        `http://localhost:8070/learningNodes/deleteLearningNode/${fetchedLearningNode._id}`
       );
-      sessionStorage.setItem("NoteDeleted", "1");
+      sessionStorage.setItem("NodeDeleted", "1");
       window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {
-      setOpenPopupDeleteOtherCode(false);
+        setOpenPopupDeleteLearningNode(false);
     }
   };
 
   return (
     <Dialog
-      open={openPopupDeleteOtherCode}
-      onBackdropClick={() => setOpenPopupDeleteOtherCode(false)}
+      open={openPopupDeleteLearningNode}
+      onBackdropClick={() => setOpenPopupDeleteLearningNode(false)}
       maxWidth="sm"
       TransitionComponent={Transition}
       PaperProps={{
@@ -60,7 +60,7 @@ export default function DeleteOtherCode(props) {
         <DialogTitle>
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
-              <p className="popupTitle">Delete Note?</p>
+              <p className="popupTitle">Delete Node?</p>
             </div>
           </div>
 

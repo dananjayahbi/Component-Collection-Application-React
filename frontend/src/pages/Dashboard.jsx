@@ -8,8 +8,6 @@ import {
 } from "react-router-dom";
 import Home from '../pages/Home';
 import ManageFProjects from './codeComponents/NewComponent'
-import OtherCodes from './codeComponents/OtherCodes'
-import AddOtherCode from './codeComponents/AddOtherCode'
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SiteSettings from './Settings/SiteSettings';
@@ -18,6 +16,7 @@ import Categories from './codeComponents/Categories';
 import UpdateComponent from './codeComponents/UpdateComponent';
 import Notification from '../components/Notification';
 import LearnNodes from './codeComponents/LearnNodes';
+import AddLearningNode from './codeComponents/AddLearningNode';
 import axios from "axios";
 
 function Dashboard() {
@@ -216,6 +215,24 @@ function Dashboard() {
       });
       sessionStorage.removeItem("NoteDeleted");
     }
+
+    if (sessionStorage.getItem("NodeAdded") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Node Added Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("NodeAdded");
+    }
+
+    if (sessionStorage.getItem("NodeUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Node Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("NodeUpdated");
+    }
   });
 
 
@@ -254,9 +271,8 @@ function Dashboard() {
                 <Route path="/" element={<Home />} />
                 <Route path="/NewComponent" element={<ManageFProjects />} />
                 <Route path="/UpdateComponent/:id" element={<UpdateComponent />} />
-                <Route path="/otherCodes" element={<OtherCodes />} />
-                <Route path="/AddOtherCode" element={<AddOtherCode />} />
                 <Route path="/learningNodes" element={<LearnNodes />} />
+                <Route path="/addLearningNode" element={<AddLearningNode />} />
                 <Route path="/CMCategories" element={<Categories />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
