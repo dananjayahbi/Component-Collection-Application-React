@@ -14,14 +14,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ViewAndUpdateLearningNode from "./ViewAndUpdateLearningNode";
-// import DeleteOtherCode from "./DeleteOtherCode";
+import DeleteLearningNode from "./DeleteLearningNode";
 
 export default function LearnNodes() {
   const [learningNodes, setLearningNodes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [openPopupVNULNode, setOpenPopupVNULNode] = useState(false);
-  const [openPopupDeleteOtherCode, setOpenPopupDeleteOtherCode] = useState(false);
+  const [openPopupDeleteLearningNode, setOpenPopupDeleteLearningNode] = useState(false);
   const [FetchedLearningNode, setFetchedLearningNode] = useState(null);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function LearnNodes() {
 
   const handleDelete = (data) => {
     setFetchedLearningNode(data);
-    setOpenPopupDeleteOtherCode(true);
+    setOpenPopupDeleteLearningNode(true);
   };
 
   return (
@@ -126,11 +126,11 @@ export default function LearnNodes() {
         setOpenPopupVNULNode={setOpenPopupVNULNode}
         learningNodeData={FetchedLearningNode}
       ></ViewAndUpdateLearningNode>
-      {/* <DeleteOtherCode
-        openPopupDeleteOtherCode={openPopupDeleteOtherCode}
-        setOpenPopupDeleteOtherCode={setOpenPopupDeleteOtherCode}
-        otherCodeData={FetchedOtherCode}
-      ></DeleteOtherCode> */}
+      <DeleteLearningNode
+        openPopupDeleteLearningNode={openPopupDeleteLearningNode}
+        setOpenPopupDeleteLearningNode={setOpenPopupDeleteLearningNode}
+        learningNodeData={FetchedLearningNode}
+      ></DeleteLearningNode>
     </>
   );
 }

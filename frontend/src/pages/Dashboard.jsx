@@ -8,8 +8,6 @@ import {
 } from "react-router-dom";
 import Home from '../pages/Home';
 import ManageFProjects from './codeComponents/NewComponent'
-import OtherCodes from './codeComponents/OtherCodes'
-import AddOtherCode from './codeComponents/AddOtherCode'
 import UsersList from './Users/UsersList';
 import RolesList from './Users/RolesList';
 import SiteSettings from './Settings/SiteSettings';
@@ -273,8 +271,6 @@ function Dashboard() {
                 <Route path="/" element={<Home />} />
                 <Route path="/NewComponent" element={<ManageFProjects />} />
                 <Route path="/UpdateComponent/:id" element={<UpdateComponent />} />
-                <Route path="/otherCodes" element={<OtherCodes />} />
-                <Route path="/AddOtherCode" element={<AddOtherCode />} />
                 <Route path="/learningNodes" element={<LearnNodes />} />
                 <Route path="/addLearningNode" element={<AddLearningNode />} />
                 <Route path="/CMCategories" element={<Categories />} />
