@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const {
+  backupImages,
   addComponent,
   getAllComponents,
   getComponent,
@@ -22,5 +23,8 @@ router.put("/updateComponent/:id", updateComponent);
 
 //DELETE PROJECT
 router.delete("/deleteComponent/:id", deleteComponent);
+
+//BACKUP COMPONENT IMAGES
+router.get("/backupImages", backupImages);
 
 module.exports = router;

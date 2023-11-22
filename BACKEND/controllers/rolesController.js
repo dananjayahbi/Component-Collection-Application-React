@@ -6,7 +6,7 @@ const addRole = async (req, res) => {
     const { role, description, permissions, status } = req.body;
 
     // Transform permissions array from frontend data
-    const pageNames = ["All Admin Permissions", "All User Permissions"]; // Replace with actual page names
+    const pageNames = ["All Admin Permissions", "All User Permissions", "All Component Edit Permissions"]; // Replace with actual page names
     const transformedPermissions = pageNames.map((pageName) => ({
       page: pageName,
       access: permissions.includes(pageName),

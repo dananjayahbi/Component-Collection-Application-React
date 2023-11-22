@@ -47,6 +47,7 @@ const apiUrl = "http://localhost:8070/roles/addRole"; // Change to your API URL
 const mainSelections = [
   { name: "Administrators", subs: ["All Admin Permissions"] },
   { name: "Users", subs: ["All User Permissions"] },
+  { name: "Components", subs: ["All Component Edit Permissions"] },
   // Add more main selections and their sub-selections as needed
 ];
 

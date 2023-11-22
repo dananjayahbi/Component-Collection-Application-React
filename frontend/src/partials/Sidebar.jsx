@@ -112,7 +112,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     const pagePermission = pagePermissions.find(
       (permission) => permission.page === pageName
     );
-    //console.log(pagePermission)
     console.log();
 
     if (pagePermission) {
@@ -292,7 +291,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
-                          {checkPageAccess("All Admin Permissions") ? (
+                          {checkPageAccess("All Component Edit Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -314,7 +313,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ) : null}
 
-                          {checkPageAccess("All Admin Permissions") ? (
+                          {checkPageAccess("All User Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -336,7 +335,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ) : null}
 
-                          {checkPageAccess("All Admin Permissions") ? (
+                          {checkPageAccess("All Component Edit Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -405,7 +404,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
-                          {checkPageAccess("Users List") ? (
+                          {checkPageAccess("All Admin Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -427,7 +426,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ) : null}
 
-                          {checkPageAccess("Roles List") ? (
+                          {checkPageAccess("All Admin Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
