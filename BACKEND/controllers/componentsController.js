@@ -21,6 +21,7 @@ const addComponent = async (req, res) => {
   const {
     componentName,
     category,
+    mainTechnology,
     imageURL,
     description,
     notes,
@@ -42,6 +43,7 @@ const addComponent = async (req, res) => {
     CID: cid,
     componentName,
     category,
+    mainTechnology,
     imageURL,
     description,
     notes,
@@ -83,6 +85,7 @@ const getComponent = async (req, res) => {
         CID: cid,
         componentName,
         category,
+        mainTechnology,
         imageURL,
         description,
         notes,
@@ -94,6 +97,7 @@ const getComponent = async (req, res) => {
         CID: cid,
         componentName,
         category,
+        mainTechnology,
         imageURL,
         description,
         notes,
@@ -110,6 +114,7 @@ const updateComponent = async (req, res) => {
       const { 
         componentName,
         category,
+        mainTechnology,
         imageURL,
         description,
         notes,
@@ -119,6 +124,7 @@ const updateComponent = async (req, res) => {
       let updateData = {
         componentName,
         category,
+        mainTechnology,
         imageURL,
         description,
         notes,

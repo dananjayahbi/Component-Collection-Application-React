@@ -16,6 +16,10 @@ const newComponent = new Schema(
       type: String,
       required: true,
     },
+    mainTechnology: {
+      type: String,
+      required: true,
+    },
     imageURL: {
         type: String,
     },
@@ -29,6 +33,7 @@ const newComponent = new Schema(
       {
         language: String,
         code: String,
+        notes: String,
       }
     ]
   },
@@ -37,6 +42,6 @@ const newComponent = new Schema(
   }
 );
 
-const Components = mongoose.model("FiverrProjects", newComponent);
+const Components = mongoose.model("Components", newComponent);
 
 module.exports = Components;
