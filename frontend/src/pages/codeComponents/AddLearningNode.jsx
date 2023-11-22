@@ -168,6 +168,7 @@ export default function AddLearningNode() {
                   name={`sections[${sectionIndex}].note`}
                   label="Section Note"
                   value={section.note}
+                  minRows={5}
                   onChange={formik.handleChange}
                 />
               </Grid>
@@ -291,6 +292,7 @@ export default function AddLearningNode() {
                       name={`sections[${sectionIndex}].codes[${codeIndex}].notes`}
                       label="Code Notes"
                       value={code.notes}
+                      minRows={5}
                       onChange={formik.handleChange}
                     />
                   </Grid>
