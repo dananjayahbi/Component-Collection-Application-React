@@ -10,9 +10,8 @@ import SidebarLinkGroup from "./SidebarLinkGroup";
 import axios from "axios";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import ConstructionIcon from "@mui/icons-material/Construction";
-import ConnectedTvIcon from "@mui/icons-material/ConnectedTv";
-import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import AirlineStopsIcon from "@mui/icons-material/AirlineStops";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
@@ -28,7 +27,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const token = window.localStorage.getItem("token");
   const [loggedInUserDetails, setLoggedInUserDetails] = useState("");
-  const [hasAccess, setHasAccess] = useState(false);
   const [pagePermissions, setPagePermissions] = useState([]);
 
   // close on click outside
@@ -114,7 +112,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     const pagePermission = pagePermissions.find(
       (permission) => permission.page === pageName
     );
-    //console.log(pagePermission)
     console.log();
 
     if (pagePermission) {
@@ -294,7 +291,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
-                          {checkPageAccess("All Admin Permissions") ? (
+                          {checkPageAccess("All Component Edit Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -316,7 +313,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ) : null}
 
-                          {checkPageAccess("All Admin Permissions") ? (
+                          {checkPageAccess("All User Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -338,7 +335,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ) : null}
 
-                          {checkPageAccess("All Admin Permissions") ? (
+                          {checkPageAccess("All Component Edit Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -407,7 +404,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
-                          {checkPageAccess("Users List") ? (
+                          {checkPageAccess("All Admin Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
@@ -429,7 +426,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </li>
                           ) : null}
 
-                          {checkPageAccess("Roles List") ? (
+                          {checkPageAccess("All Admin Permissions") ? (
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end

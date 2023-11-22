@@ -1,13 +1,12 @@
 const router = require("express").Router();
 
 const {
-    addRole,
-    getAllRoles,
-    updateRole,
-    deleteRole,
-    getRole
+  addRole,
+  getAllRoles,
+  updateRole,
+  deleteRole,
+  getRole,
 } = require("../controllers/rolesController");
-
 
 //ADD NEW ROLE
 router.post("/addRole", addRole);
@@ -23,6 +22,5 @@ router.put("/updateRole/:id", updateRole);
 
 //DELETE ROLE
 router.delete("/deleteRole/:id", deleteRole);
-
 
 module.exports = router;

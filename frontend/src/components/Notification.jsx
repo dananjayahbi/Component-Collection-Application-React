@@ -15,7 +15,9 @@ export default function Notification(props) {
   };
 
   // Validate the severity value
-  const validSeverity = ["error", "info", "success", "warning"].includes(notify.type)
+  const validSeverity = ["error", "info", "success", "warning"].includes(
+    notify.type
+  )
     ? notify.type
     : "info"; // Default to "info" if the value is not valid
 

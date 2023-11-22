@@ -30,18 +30,21 @@ export default function CCProjectCategories() {
   const [filteredFPCategories, setFilteredFPCategories] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
   const [openPopupAddFPCategory, setOpenPopupAddFPCategory] = useState(false); //Popup for NewBrand
-  const [openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory] = useState(false); //Popup for UpdateBrand
-  const [openPopupDeleteFPCategory, setOpenPopupDeleteFPCategory] = useState(false); //Popup for DeleteBrand
+  const [openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory] =
+    useState(false); //Popup for UpdateBrand
+  const [openPopupDeleteFPCategory, setOpenPopupDeleteFPCategory] =
+    useState(false); //Popup for DeleteBrand
   const [fetchedFPCategory, setFetchedFPCategory] = useState(null); //for delete functionality
   const [fetchedFPCID, setFetchedFPCID] = useState(null);
   const tableRef = useRef(null);
 
-  
   //Fetch All FP Categories
   useEffect(() => {
-    const fetchFPCategories= async () => {
+    const fetchFPCategories = async () => {
       try {
-        const response = await fetch("http://localhost:8070/Categories/getAllCategories/");
+        const response = await fetch(
+          "http://localhost:8070/Categories/getAllCategories/"
+        );
         const data = await response.json();
         setFPCategories(data);
         setLoading(false); // Set loading to false when data is fetched
@@ -52,7 +55,11 @@ export default function CCProjectCategories() {
     };
 
     fetchFPCategories();
-  }, [openPopupAddFPCategory, openPopupUpdateFPCategory, openPopupDeleteFPCategory]);
+  }, [
+    openPopupAddFPCategory,
+    openPopupUpdateFPCategory,
+    openPopupDeleteFPCategory,
+  ]);
 
   //Search functionality
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,27 +68,27 @@ export default function CCProjectCategories() {
   };
 
   useEffect(() => {
-    const filtered = FPCategories.filter((Category) => 
-      (Category.categoryName && Category.categoryName.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filtered = FPCategories.filter(
+      (Category) =>
+        Category.categoryName &&
+        Category.categoryName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredFPCategories(filtered);
   }, [FPCategories, searchTerm]);
 
-
   //Handle Update
-  function handleUpdate(FPCID){
+  function handleUpdate(FPCID) {
     setFetchedFPCID(FPCID);
     setOpenPopupUpdateFPCategory(true);
   }
 
   //Handle Delete
-  function handleDelete(FPCID, Category){
+  function handleDelete(FPCID, Category) {
     setFetchedFPCategory(Category);
     setFetchedFPCID(FPCID);
     setOpenPopupDeleteFPCategory(true);
   }
 
-  
   return (
     <Box p={1}>
       <Box>
@@ -90,39 +97,53 @@ export default function CCProjectCategories() {
       </Box>
 
       <Box display="flex" justifyContent="flex-end" sx={{ mt: -3 }}>
-      <TextField
-        id="outlined-basic"
-        label="Search by Category name"
-        variant="outlined"
-        value={searchTerm}
-        onChange={handleSearchTermChange}
-        fullWidth
-        margin="dense"
-        style={{ width: "30%", marginInlineEnd: "10px", marginTop: "-20px", paddingTop: "5px" }}
-        InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
-        inputProps={{
-          style: {
-            textAlign: "left",
-            padding: "10px",
-            fontSize: "14px", // Reduce font size of input text
-            lineHeight: "1.4", // Vertically center the text
-          },
-          type: "search", // Change the type attribute
-        }}
-      />
+        <TextField
+          id="outlined-basic"
+          label="Search by Category name"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+          fullWidth
+          margin="dense"
+          style={{
+            width: "30%",
+            marginInlineEnd: "10px",
+            marginTop: "-20px",
+            paddingTop: "5px",
+          }}
+          InputLabelProps={{ style: { fontSize: "14px" } }} // Reduce font size of label
+          inputProps={{
+            style: {
+              textAlign: "left",
+              padding: "10px",
+              fontSize: "14px", // Reduce font size of input text
+              lineHeight: "1.4", // Vertically center the text
+            },
+            type: "search", // Change the type attribute
+          }}
+        />
 
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => {setOpenPopupAddFPCategory(true)}}
+          onClick={() => {
+            setOpenPopupAddFPCategory(true);
+          }}
           sx={{ mt: -2, height: "40px" }}
         >
           Add Category
         </Button>
       </Box>
-      <TableContainer component={Paper} sx={{ marginTop: 2, overflowX: 'auto', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)' }}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          marginTop: 2,
+          overflowX: "auto",
+          boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+        }}
+      >
         <Table ref={tableRef}>
-          <TableHead sx={{ backgroundColor: '#f0f0f0' }}>
+          <TableHead sx={{ backgroundColor: "#f0f0f0" }}>
             <TableRow>
               <TableCell>Category name</TableCell>
               <TableCell>Description</TableCell>
@@ -145,13 +166,25 @@ export default function CCProjectCategories() {
             ) : (
               filteredFPCategories.map((Category) => (
                 <TableRow key={Category._id}>
-                  <TableCell style={{ whiteSpace: 'pre-line', height: 'auto' }}>{Category.categoryName}</TableCell>
-                  <TableCell style={{ whiteSpace: 'pre-line', height: 'auto' }}>{Category.description}</TableCell>
+                  <TableCell style={{ whiteSpace: "pre-line", height: "auto" }}>
+                    {Category.categoryName}
+                  </TableCell>
+                  <TableCell style={{ whiteSpace: "pre-line", height: "auto" }}>
+                    {Category.description}
+                  </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => { handleUpdate(Category._id) }}>
+                    <IconButton
+                      onClick={() => {
+                        handleUpdate(Category._id);
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={() => { handleDelete(Category._id, Category.categoryName) }}>
+                    <IconButton
+                      onClick={() => {
+                        handleDelete(Category._id, Category.categoryName);
+                      }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -168,10 +201,21 @@ export default function CCProjectCategories() {
         </Table>
       </TableContainer>
 
-      <AddFPCategory openPopupAddFPCategory={openPopupAddFPCategory} setOpenPopupAddFPCategory={setOpenPopupAddFPCategory}></AddFPCategory>
-      <UpdateFPCategory openPopupUpdateFPCategory={openPopupUpdateFPCategory} setOpenPopupUpdateFPCategory={setOpenPopupUpdateFPCategory} FPCID = {fetchedFPCID}></UpdateFPCategory>
-      <DeleteFPCategory openPopupDeleteFPCategory={openPopupDeleteFPCategory} setOpenPopupDeleteFPCategory={setOpenPopupDeleteFPCategory} FPCID = {fetchedFPCID} categoryName = {fetchedFPCategory}></DeleteFPCategory>
-
+      <AddFPCategory
+        openPopupAddFPCategory={openPopupAddFPCategory}
+        setOpenPopupAddFPCategory={setOpenPopupAddFPCategory}
+      ></AddFPCategory>
+      <UpdateFPCategory
+        openPopupUpdateFPCategory={openPopupUpdateFPCategory}
+        setOpenPopupUpdateFPCategory={setOpenPopupUpdateFPCategory}
+        FPCID={fetchedFPCID}
+      ></UpdateFPCategory>
+      <DeleteFPCategory
+        openPopupDeleteFPCategory={openPopupDeleteFPCategory}
+        setOpenPopupDeleteFPCategory={setOpenPopupDeleteFPCategory}
+        FPCID={fetchedFPCID}
+        categoryName={fetchedFPCategory}
+      ></DeleteFPCategory>
     </Box>
-  );  
+  );
 }

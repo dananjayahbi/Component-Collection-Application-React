@@ -40,9 +40,6 @@ const getPageAccessForRole = async (req, res) => {
   }
 };
 
-
-
-
 // Function to fetch all page permissions for a specific role
 const getAllPagePermissionsForRole = async (req, res) => {
   try {
@@ -70,5 +67,5 @@ const getAllPagePermissionsForRole = async (req, res) => {
 
 module.exports = {
   getPageAccessForRole,
-  getAllPagePermissionsForRole
+  getAllPagePermissionsForRole,
 };

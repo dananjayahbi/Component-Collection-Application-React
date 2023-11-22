@@ -10,15 +10,14 @@ import {
   DialogTitle,
   Slide,
   Box,
-  CircularProgress
+  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
-import CustomTextField from "../../components/CustomTextField"
+import CustomTextField from "../../components/CustomTextField";
 import ClearIcon from "@mui/icons-material/Clear";
-import LoopIcon from '@mui/icons-material/Loop';
+import LoopIcon from "@mui/icons-material/Loop";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -44,50 +43,49 @@ export default function UpdateFPCategory(props) {
   const { openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory } = props;
   const [fetchedFPCategoryData, setFetchedFPCategoryData] = useState();
   const [loading, setLoading] = useState(true);
-  
-    async function getFPCategory() {
-        setLoading(true);
-        await axios
-            .get(`http://localhost:8070/Categories/getCategory/${props.FPCID}`)
-            .then((res) => {
-                setFetchedFPCategoryData(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+
+  async function getFPCategory() {
+    setLoading(true);
+    await axios
+      .get(`http://localhost:8070/Categories/getCategory/${props.FPCID}`)
+      .then((res) => {
+        setFetchedFPCategoryData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    if (props.FPCID != null) {
+      getFPCategory();
     }
+  }, [props, openPopupUpdateFPCategory]);
 
-    useEffect(() =>{
-        if (props.FPCID != null){
-            getFPCategory();
-        }
-    }, [props, openPopupUpdateFPCategory]);
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      const dataToSend = {
+        categoryName: values.categoryName,
+        description: values.description,
+      };
 
-
-    const handleSubmit = async (values, { setSubmitting }) => {
-      try {
-        const dataToSend = {
-          categoryName: values.categoryName,
-          description: values.description,
-        };
-  
-        await axios.put(apiUrl, dataToSend);
-        sessionStorage.setItem("CategoryUpdated", "1");
-        navigate("/CMCategories");
-      } catch (error) {
-        setNotify({
-          isOpen: true,
-          message: err.response.data.errorMessage,
-          type: "error",
-        });
-      } finally {
-        setSubmitting(false);
-        setOpenPopupUpdateFPCategory(false);
-      }
-    };
+      await axios.put(apiUrl, dataToSend);
+      sessionStorage.setItem("CategoryUpdated", "1");
+      navigate("/CMCategories");
+    } catch (error) {
+      setNotify({
+        isOpen: true,
+        message: err.response.data.errorMessage,
+        type: "error",
+      });
+    } finally {
+      setSubmitting(false);
+      setOpenPopupUpdateFPCategory(false);
+    }
+  };
 
   return (
     <Dialog
@@ -96,16 +94,21 @@ export default function UpdateFPCategory(props) {
       maxWidth="md"
       TransitionComponent={Transition}
       PaperProps={{
-          style: { borderRadius: 10, width: "80%", padding: "20px", paddingBottom: "30px"},
+        style: {
+          borderRadius: 10,
+          width: "80%",
+          padding: "20px",
+          paddingBottom: "30px",
+        },
       }}
     >
       <div className="popup">
         <DialogTitle>
-        <div className="d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
-            <p className="popupTitle">Update Component Category</p>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center">
+              <p className="popupTitle">Update Component Category</p>
+            </div>
           </div>
-        </div>
 
           {/* NOTIFICATION */}
           <Notification notify={notify} setNotify={setNotify} />
@@ -120,55 +123,77 @@ export default function UpdateFPCategory(props) {
         </DialogTitle>
 
         <DialogContent>
-        {loading ? (
+          {loading ? (
             <Box display="flex" justifyContent="center">
-                <CircularProgress />
+              <CircularProgress />
             </Box>
-        ) : (
-          <Formik
-            initialValues={{
+          ) : (
+            <Formik
+              initialValues={{
                 categoryName: fetchedFPCategoryData?.categoryName || "",
                 description: fetchedFPCategoryData?.description || "",
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting, values }) => (
-            <Form>
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="categoryName" label="Category Name" />
-              </Grid>
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ isSubmitting, values }) => (
+                <Form>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{ marginBottom: "10px", marginTop: "10px" }}
+                  >
+                    <CustomTextField
+                      name="categoryName"
+                      label="Category Name"
+                    />
+                  </Grid>
 
-              <Grid item xs={12} style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <CustomTextField name="description" label="Description" multiline rows={6}/>
-              </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{ marginBottom: "10px", marginTop: "10px" }}
+                  >
+                    <CustomTextField
+                      name="description"
+                      label="Description"
+                      multiline
+                      rows={6}
+                    />
+                  </Grid>
 
-              <div style={{ display: "flex", justifyContent: "right", marginTop: "1rem" }}>
-                <Button
-                  startIcon={<ClearIcon />}
-                  style={{marginRight: "15px"}}
-                  onClick={() => {
-                    setOpenPopupUpdateFPCategory(false);
-                  }}
-                  variant="outlined"
-                  color="primary"
-                >
-                  Close
-                </Button>
-                <Button 
-                  type="submit" 
-                  variant="contained"
-                  color="primary"
-                  disabled={isSubmitting}
-                  startIcon={<LoopIcon />}
-                >
-                  Update
-                </Button>
-              </div>
-            </Form>
-            )}
-          </Formik>
-        )}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "right",
+                      marginTop: "1rem",
+                    }}
+                  >
+                    <Button
+                      startIcon={<ClearIcon />}
+                      style={{ marginRight: "15px" }}
+                      onClick={() => {
+                        setOpenPopupUpdateFPCategory(false);
+                      }}
+                      variant="outlined"
+                      color="primary"
+                    >
+                      Close
+                    </Button>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      disabled={isSubmitting}
+                      startIcon={<LoopIcon />}
+                    >
+                      Update
+                    </Button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          )}
         </DialogContent>
       </div>
     </Dialog>

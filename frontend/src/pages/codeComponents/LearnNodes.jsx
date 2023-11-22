@@ -21,7 +21,8 @@ export default function LearnNodes() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [openPopupVNULNode, setOpenPopupVNULNode] = useState(false);
-  const [openPopupDeleteLearningNode, setOpenPopupDeleteLearningNode] = useState(false);
+  const [openPopupDeleteLearningNode, setOpenPopupDeleteLearningNode] =
+    useState(false);
   const [FetchedLearningNode, setFetchedLearningNode] = useState(null);
 
   useEffect(() => {
@@ -48,7 +49,9 @@ export default function LearnNodes() {
 
   return (
     <>
-      <Typography variant="h5" style={{ marginBottom: "20px" }}>Learning Nodes</Typography>
+      <Typography variant="h5" style={{ marginBottom: "20px" }}>
+        Learning Nodes
+      </Typography>
       <Divider style={{ marginBottom: "20px" }} />
       <Box
         style={{ display: "flex", alignItems: "center", marginBottom: "50px" }}

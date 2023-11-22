@@ -37,7 +37,7 @@ export default function DeleteLearningNode(props) {
     } catch (error) {
       console.log(error);
     } finally {
-        setOpenPopupDeleteLearningNode(false);
+      setOpenPopupDeleteLearningNode(false);
     }
   };
 
@@ -76,16 +76,16 @@ export default function DeleteLearningNode(props) {
           />
         </DialogTitle>
 
-        <DialogContent style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-                type="button"
-                variant="contained"
-                color="error"
-                startIcon={<DeleteIcon />}
-                onClick={handleDelete}
-            >
-                Delete
-            </Button>
+        <DialogContent style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            type="button"
+            variant="contained"
+            color="error"
+            startIcon={<DeleteIcon />}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
         </DialogContent>
       </div>
     </Dialog>
