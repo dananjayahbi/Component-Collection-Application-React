@@ -12,6 +12,8 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import AirlineStopsIcon from "@mui/icons-material/AirlineStops";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import PanoramaWideAngleSelectIcon from '@mui/icons-material/PanoramaWideAngleSelect';
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
@@ -304,7 +306,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                     : "text-slate-400 hover:text-slate-200")
                                 }
                               >
-                                <LightbulbIcon
+                                <PanoramaWideAngleSelectIcon
                                   sx={{ fontSize: 15, marginRight: "5px" }}
                                 />
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -340,7 +342,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/CMCategories"
+                                to="/CPIdeas"
                                 className={({ isActive }) =>
                                   "block transition duration-150 truncate " +
                                   (isActive
@@ -348,11 +350,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                     : "text-slate-400 hover:text-slate-200")
                                 }
                               >
-                                <AirlineStopsIcon
+                                <LightbulbIcon
                                   sx={{ fontSize: 15, marginRight: "5px" }}
                                 />
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                  CM Ideas
+                                  CP Ideas
                                 </span>
                               </NavLink>
                             </li>
@@ -362,7 +364,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             <li className="mb-1 last:mb-0">
                               <NavLink
                                 end
-                                to="/CMCategories"
+                                to="/CPIdeasCategory"
                                 className={({ isActive }) =>
                                   "block transition duration-150 truncate " +
                                   (isActive
@@ -370,11 +372,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                     : "text-slate-400 hover:text-slate-200")
                                 }
                               >
-                                <AirlineStopsIcon
+                                <OnlinePredictionIcon
                                   sx={{ fontSize: 15, marginRight: "5px" }}
                                 />
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                CM Ideas Categories
+                                CP Ideas Categories
                                 </span>
                               </NavLink>
                             </li>
