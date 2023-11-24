@@ -12,6 +12,8 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import AirlineStopsIcon from "@mui/icons-material/AirlineStops";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import PanoramaWideAngleSelectIcon from '@mui/icons-material/PanoramaWideAngleSelect';
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
@@ -304,7 +306,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                     : "text-slate-400 hover:text-slate-200")
                                 }
                               >
-                                <LightbulbIcon
+                                <PanoramaWideAngleSelectIcon
                                   sx={{ fontSize: 15, marginRight: "5px" }}
                                 />
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -331,6 +333,50 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 />
                                 <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                                   CM Categories
+                                </span>
+                              </NavLink>
+                            </li>
+                          ) : null}
+
+                          {checkPageAccess("All User Permissions") ? (
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/CPIdeas"
+                                className={({ isActive }) =>
+                                  "block transition duration-150 truncate " +
+                                  (isActive
+                                    ? "text-indigo-500"
+                                    : "text-slate-400 hover:text-slate-200")
+                                }
+                              >
+                                <LightbulbIcon
+                                  sx={{ fontSize: 15, marginRight: "5px" }}
+                                />
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                  CP Ideas
+                                </span>
+                              </NavLink>
+                            </li>
+                          ) : null}
+
+                          {checkPageAccess("All Component Edit Permissions") ? (
+                            <li className="mb-1 last:mb-0">
+                              <NavLink
+                                end
+                                to="/CPIdeasCategory"
+                                className={({ isActive }) =>
+                                  "block transition duration-150 truncate " +
+                                  (isActive
+                                    ? "text-indigo-500"
+                                    : "text-slate-400 hover:text-slate-200")
+                                }
+                              >
+                                <OnlinePredictionIcon
+                                  sx={{ fontSize: 15, marginRight: "5px" }}
+                                />
+                                <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                CP Ideas Categories
                                 </span>
                               </NavLink>
                             </li>

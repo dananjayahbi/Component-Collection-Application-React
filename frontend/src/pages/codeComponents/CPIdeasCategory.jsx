@@ -21,32 +21,32 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
-import AddFPCategory from "./AddCategory";
-import UpdateFPCategory from "./UpdateCategory";
-import DeleteFPCategory from "./DeleteCategory";
+import AddideaCategory from "./AddCPIdeaCategory";
+import UpdateideaCategory from "./UpdateCPIdeaCategory";
+import DeleteideaCategory from "./DeleteCPIdeaCategory";
 
-export default function CCProjectCategories() {
-  const [FPCategories, setFPCategories] = useState([]);
-  const [filteredFPCategories, setFilteredFPCategories] = useState([]);
+export default function CPIdeasCategories() {
+  const [ideaCategories, setideaCategories] = useState([]);
+  const [filteredideaCategories, setFilteredideaCategories] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [openPopupAddFPCategory, setOpenPopupAddFPCategory] = useState(false); //Popup
-  const [openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory] =
-    useState(false); //Popup 
-  const [openPopupDeleteFPCategory, setOpenPopupDeleteFPCategory] =
-    useState(false); //Popup 
-  const [fetchedFPCategory, setFetchedFPCategory] = useState(null); //for delete functionality
-  const [fetchedFPCID, setFetchedFPCID] = useState(null);
+  const [openPopupAddideaCategory, setOpenPopupAddideaCategory] = useState(false); //Popup
+  const [openPopupUpdateideaCategory, setOpenPopupUpdateideaCategory] =
+    useState(false); //Popup for Update
+  const [openPopupDeleteideaCategory, setOpenPopupDeleteideaCategory] =
+    useState(false); //Popup for Delete
+  const [fetchedideaCategory, setFetchedideaCategory] = useState(null); //for delete functionality
+  const [fetchedideaID, setFetchedideaID] = useState(null);
   const tableRef = useRef(null);
 
   //Fetch All FP Categories
   useEffect(() => {
-    const fetchFPCategories = async () => {
+    const fetchideaCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8070/Categories/getAllCategories/"
+          "http://localhost:8070/ideaCategories/getAllideaCategories"
         );
         const data = await response.json();
-        setFPCategories(data);
+        setideaCategories(data);
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -54,11 +54,11 @@ export default function CCProjectCategories() {
       }
     };
 
-    fetchFPCategories();
+    fetchideaCategories();
   }, [
-    openPopupAddFPCategory,
-    openPopupUpdateFPCategory,
-    openPopupDeleteFPCategory,
+    openPopupAddideaCategory,
+    openPopupUpdateideaCategory,
+    openPopupDeleteideaCategory,
   ]);
 
   //Search functionality
@@ -68,31 +68,31 @@ export default function CCProjectCategories() {
   };
 
   useEffect(() => {
-    const filtered = FPCategories.filter(
+    const filtered = ideaCategories.filter(
       (Category) =>
-        Category.categoryName &&
-        Category.categoryName.toLowerCase().includes(searchTerm.toLowerCase())
+        Category.ideacategoryName &&
+        Category.ideacategoryName.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredFPCategories(filtered);
-  }, [FPCategories, searchTerm]);
+    setFilteredideaCategories(filtered);
+  }, [ideaCategories, searchTerm]);
 
   //Handle Update
-  function handleUpdate(FPCID) {
-    setFetchedFPCID(FPCID);
-    setOpenPopupUpdateFPCategory(true);
+  function handleUpdate(ideaID) {
+    setFetchedideaID(ideaID);
+    setOpenPopupUpdateideaCategory(true);
   }
 
   //Handle Delete
-  function handleDelete(FPCID, Category) {
-    setFetchedFPCategory(Category);
-    setFetchedFPCID(FPCID);
-    setOpenPopupDeleteFPCategory(true);
+  function handleDelete(ideaID, Category) {
+    setFetchedideaCategory(Category);
+    setFetchedideaID(ideaID);
+    setOpenPopupDeleteideaCategory(true);
   }
 
   return (
     <Box p={1}>
       <Box>
-        <Typography variant="h5">Component Categories</Typography>
+        <Typography variant="h5">Idea Categories</Typography>
         <Divider sx={{ mt: 2, mb: 7.5 }} />
       </Box>
 
@@ -127,7 +127,7 @@ export default function CCProjectCategories() {
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => {
-            setOpenPopupAddFPCategory(true);
+            setOpenPopupAddideaCategory(true);
           }}
           sx={{ mt: -2, height: "40px" }}
         >
@@ -157,17 +157,17 @@ export default function CCProjectCategories() {
                   <CircularProgress />
                 </TableCell>
               </TableRow>
-            ) : filteredFPCategories.length === 0 ? ( // Display "No matching records found"
+            ) : filteredideaCategories.length === 0 ? ( // Display "No matching records found"
               <TableRow>
                 <TableCell colSpan={7} align="center">
                   No matching records found
                 </TableCell>
               </TableRow>
             ) : (
-              filteredFPCategories.map((Category) => (
+              filteredideaCategories.map((Category) => (
                 <TableRow key={Category._id}>
                   <TableCell style={{ whiteSpace: "pre-line", height: "auto" }}>
-                    {Category.categoryName}
+                    {Category.ideacategoryName}
                   </TableCell>
                   <TableCell style={{ whiteSpace: "pre-line", height: "auto" }}>
                     {Category.description}
@@ -182,7 +182,7 @@ export default function CCProjectCategories() {
                     </IconButton>
                     <IconButton
                       onClick={() => {
-                        handleDelete(Category._id, Category.categoryName);
+                        handleDelete(Category._id, Category.ideacategoryName);
                       }}
                     >
                       <DeleteIcon />
@@ -194,28 +194,28 @@ export default function CCProjectCategories() {
             {/* Display the count of records */}
             <TableRow>
               <TableCell colSpan={7} align="left">
-                Total Categories : {filteredFPCategories.length}
+                Total Categories : {filteredideaCategories.length}
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
 
-      <AddFPCategory
-        openPopupAddFPCategory={openPopupAddFPCategory}
-        setOpenPopupAddFPCategory={setOpenPopupAddFPCategory}
-      ></AddFPCategory>
-      <UpdateFPCategory
-        openPopupUpdateFPCategory={openPopupUpdateFPCategory}
-        setOpenPopupUpdateFPCategory={setOpenPopupUpdateFPCategory}
-        FPCID={fetchedFPCID}
-      ></UpdateFPCategory>
-      <DeleteFPCategory
-        openPopupDeleteFPCategory={openPopupDeleteFPCategory}
-        setOpenPopupDeleteFPCategory={setOpenPopupDeleteFPCategory}
-        FPCID={fetchedFPCID}
-        categoryName={fetchedFPCategory}
-      ></DeleteFPCategory>
+      <AddideaCategory
+        openPopupAddideaCategory={openPopupAddideaCategory}
+        setOpenPopupAddideaCategory={setOpenPopupAddideaCategory}
+      ></AddideaCategory>
+      <UpdateideaCategory
+        openPopupUpdateideaCategory={openPopupUpdateideaCategory}
+        setOpenPopupUpdateideaCategory={setOpenPopupUpdateideaCategory}
+        ideaID={fetchedideaID}
+      ></UpdateideaCategory>
+      <DeleteideaCategory
+        openPopupDeleteideaCategory={openPopupDeleteideaCategory}
+        setOpenPopupDeleteideaCategory={setOpenPopupDeleteideaCategory}
+        ideaID={fetchedideaID}
+        ideacategoryName={fetchedideaCategory}
+      ></DeleteideaCategory>
     </Box>
   );
 }
