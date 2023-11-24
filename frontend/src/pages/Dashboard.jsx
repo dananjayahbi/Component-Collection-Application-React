@@ -13,6 +13,8 @@ import UpdateComponent from "./codeComponents/UpdateComponent";
 import Notification from "../components/Notification";
 import LearnNodes from "./codeComponents/LearnNodes";
 import AddLearningNode from "./codeComponents/AddLearningNode";
+import CPIdeasCategory from "./codeComponents/CPIdeasCategory";
+import CPIdeas from "./codeComponents/CPIdeas";
 import axios from "axios";
 
 function Dashboard() {
@@ -273,6 +275,8 @@ function Dashboard() {
                 <Route path="/learningNodes" element={<LearnNodes />} />
                 <Route path="/addLearningNode" element={<AddLearningNode />} />
                 <Route path="/CMCategories" element={<Categories />} />
+                <Route path="/CPIdeasCategory" element={<CPIdeasCategory />} />
+                <Route path="/CPIdeas" element={<CPIdeas />} />
                 <Route path="/users/usersList" element={<UsersList />} />
                 <Route path="/users/rolesList" element={<RolesList />} />
                 <Route
