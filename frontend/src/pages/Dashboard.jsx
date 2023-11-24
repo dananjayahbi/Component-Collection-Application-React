@@ -230,6 +230,24 @@ function Dashboard() {
       });
       sessionStorage.removeItem("NodeUpdated");
     }
+
+    if (sessionStorage.getItem("IdeaCategoryCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Idea Category Created Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("IdeaCategoryCreated");
+    }
+
+    if (sessionStorage.getItem("IdeaCategoryUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Idea Category Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("IdeaCategoryUpdated");
+    }
   });
 
   //Getting Loggen In user's details
