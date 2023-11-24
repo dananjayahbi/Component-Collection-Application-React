@@ -248,6 +248,33 @@ function Dashboard() {
       });
       sessionStorage.removeItem("IdeaCategoryUpdated");
     }
+
+    if (sessionStorage.getItem("CPIdeaCreated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Idea Added Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CPIdeaCreated");
+    }
+
+    if (sessionStorage.getItem("CPIdeaUpdated") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Idea Updated Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CPIdeaUpdated");
+    }
+
+    if (sessionStorage.getItem("CPIdeaDeleted") == "1") {
+      setNotify({
+        isOpen: true,
+        message: "Idea Deleted Successfully!",
+        type: "success",
+      });
+      sessionStorage.removeItem("CPIdeaDeleted");
+    }
   });
 
   //Getting Loggen In user's details

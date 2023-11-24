@@ -16,6 +16,7 @@ app.use(express.json());
 app.use("/Components", require("./routes/ComponentsRoutes"));
 app.use("/Categories", require("./routes/ComponentCategoriesRoutes"));
 app.use("/ideaCategories", require("./routes/CPIdeaCategoryRoutes"));
+app.use("/ideas", require("./routes/CPIdeasRoutes"));
 app.use("/users", require("./routes/UsersRoutes"));
 app.use("/roles", require("./routes/RolesRoutes"));
 app.use("/rolesPermissions", require("./routes/RolesPermissionsRoutes"));

@@ -29,11 +29,11 @@ export default function CCProjectCategories() {
   const [FPCategories, setFPCategories] = useState([]);
   const [filteredFPCategories, setFilteredFPCategories] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [openPopupAddFPCategory, setOpenPopupAddFPCategory] = useState(false); //Popup for NewBrand
+  const [openPopupAddFPCategory, setOpenPopupAddFPCategory] = useState(false); //Popup
   const [openPopupUpdateFPCategory, setOpenPopupUpdateFPCategory] =
-    useState(false); //Popup for UpdateBrand
+    useState(false); //Popup 
   const [openPopupDeleteFPCategory, setOpenPopupDeleteFPCategory] =
-    useState(false); //Popup for DeleteBrand
+    useState(false); //Popup 
   const [fetchedFPCategory, setFetchedFPCategory] = useState(null); //for delete functionality
   const [fetchedFPCID, setFetchedFPCID] = useState(null);
   const tableRef = useRef(null);
