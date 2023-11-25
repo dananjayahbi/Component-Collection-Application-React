@@ -85,7 +85,7 @@ export default function CPIdeas() {
 
   return (
     <Box>
-      <Typography variant="h5">Browse Components</Typography>
+      <Typography variant="h5">Browse Component Ideas</Typography>
       <Divider sx={{ mt: 2, mb: 2.5 }} />
 
       <Button
